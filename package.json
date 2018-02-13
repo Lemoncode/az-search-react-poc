@@ -1,0 +1,39 @@
+{
+  "name": "jfk-react-poc",
+  "version": "1.0.0",
+  "description": "JFK Proof of Concept based on React",
+  "main": "app.js",
+  "scripts": {
+    "start": "webpack-dev-server --config=webpack.dev.config.js",
+    "build": "rimraf dist && webpack --config=webpack.dev.config.js",
+    "build:prod": "rimraf dist && webpack -p --config=webpack.prod.config.js"
+  },
+  "author": "Javier Calzado",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "~3.3.7",
+    "react": "~16.1.1",
+    "react-dom": "~16.1.1",
+    "react-router-dom": "^4.2.2"
+  },
+  "devDependencies": {
+    "@types/history": "^4.6.1",
+    "@types/react": "~16.0.21",
+    "@types/react-dom": "~16.0.2",
+    "@types/react-router-dom": "^4.2.0",
+    "awesome-typescript-loader": "^3.3.0",
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "css-loader": "~0.28.7",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "~1.1.5",
+    "html-webpack-plugin": "~2.30.1",
+    "rimraf": "^2.6.2",
+    "style-loader": "~0.19.0",
+    "typescript": "~2.6.1",
+    "url-loader": "~0.6.2",
+    "webpack": "~3.8.1",
+    "webpack-dev-server": "^2.9.4",
+    "webpack-merge": "^4.1.1"
+  }
+}
