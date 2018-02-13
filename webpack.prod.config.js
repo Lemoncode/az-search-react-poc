@@ -16,9 +16,10 @@ module.exports = function () {
 
     module: {
       rules: [
-        // *** Loading pipe for CSS. No exclusions. Vendor css permited ***
+        // *** Loading pipe for CSS ***
         {
           test: /\.css$/,
+          exclude: [/node_modules/],
           loader: ExtractTextPlugin.extract({
             fallback: "style-loader",
             use: [
@@ -30,6 +31,19 @@ module.exports = function () {
                   importLoaders: 1,
                   localIdentName: "[local]__[name]___[hash:base64:5]"
                 }
+              },
+            ]
+          })
+        },
+        // *** Loading pipe for vendor CSS. No CSS Modules here ***
+        {
+          test: /\.css$/,
+          include: [/node_modules/],
+          loader: ExtractTextPlugin.extract({
+            fallback: "style-loader",
+            use: [
+              {
+                loader: "css-loader",               
               },
             ]
           })

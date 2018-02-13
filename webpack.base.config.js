@@ -60,7 +60,7 @@ module.exports = {
       // The rest are fallbacks just in case, dont' embedd them ***
       {
         test: /\.eot$/,
-        exclude: [/node_modules/],
+        // exclude: [/node_modules/],
         use: [
           {
             loader: "url-loader",
@@ -74,7 +74,7 @@ module.exports = {
       },
       {
         test: /\.([ot]tf)$/,
-        exclude: [/node_modules/],
+        // exclude: [/node_modules/],
         use: [
           {
             loader: "url-loader",
@@ -88,7 +88,7 @@ module.exports = {
       },
       {
         test: /\.(woff|woff2)?$/,
-        exclude: [/node_modules/],
+        // exclude: [/node_modules/],
         use: [
           {
             loader: "url-loader",
@@ -102,7 +102,7 @@ module.exports = {
       },
       {
         test: /\.svg$/,
-        exclude: [/node_modules/],
+        // exclude: [/node_modules/],
         include: [/fonts/],
         use: [
           {
