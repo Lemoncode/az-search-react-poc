@@ -1,0 +1,1 @@
+export { ResultGridComponent } from "./resultGridComponent";

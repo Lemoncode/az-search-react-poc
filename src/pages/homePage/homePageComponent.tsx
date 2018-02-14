@@ -2,7 +2,7 @@ import * as React from "react"
 import { Link } from 'react-router-dom';
 import { ButtonComponent } from "../../common/components/button";
 import { BarComponent } from "../../common/components/bar";
-const styles = require("./homePageComponent.scss");
+const styles = require("./homePage.scss");
 
 export const HomePageComponent: React.StatelessComponent<{}> = () => {
   return (

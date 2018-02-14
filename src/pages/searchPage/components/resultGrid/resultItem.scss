@@ -1,0 +1,18 @@
+.item {
+  width: 18rem;
+  margin: 1rem;
+}
+
+.item-thumbnail {
+  height: 24rem;
+}
+
+.item-caption {
+  height: 9rem;
+}
+
+.ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
