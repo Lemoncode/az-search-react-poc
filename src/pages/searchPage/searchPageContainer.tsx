@@ -3,6 +3,7 @@ import { SearchPageComponent } from "./searchPageComponent";
 import { azApi } from "../../api";
 
 interface State {
+  searchValue: string;
   searchResult: any;
 }
 
@@ -11,13 +12,21 @@ class SearchPageContainer extends React.Component<{}, State> {
     super(props);
 
     this.state = {
+      searchValue: "",
       searchResult: null,
     };
   }
 
-  public componentDidMount() {
+  private handleSearchUpdate = (newValue) => {
+    this.setState({
+      ...this.state,
+      searchValue: newValue,
+    });
+  }
+
+  private handleSearchClick = () => {
     azApi
-      .setSearch("star wars")
+      .setSearch(this.state.searchValue)
       .run()
       .then(response => {
         this.setState({
@@ -29,10 +38,14 @@ class SearchPageContainer extends React.Component<{}, State> {
   }
 
   public render() {
-    const { searchResult } = this.state;
     return (
       <div>
-        <SearchPageComponent searchResult={searchResult}/>
+        <SearchPageComponent
+          searchValue={this.state.searchValue}
+          searchResult={this.state.searchResult}
+          onSearchUpdate={this.handleSearchUpdate}
+          onSearchClick={this.handleSearchClick}
+        />
       </div>
     );    
   }

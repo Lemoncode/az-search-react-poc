@@ -1,1 +1,1 @@
-export { SearchContainer } from "./searchContainer";
+export { SearchComponent } from "./searchComponent";

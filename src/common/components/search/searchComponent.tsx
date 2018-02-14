@@ -4,8 +4,8 @@ import { ButtonComponent } from "../button";
 interface Search {
   inline?: boolean;
   value: string;
-  onClick: () => void;
-  onChange: (value: string) => void;
+  onSearchClick: () => void;
+  onSearchUpdate: (value: string) => void;
 }
 
 const SearchComponent: React.StatelessComponent<Search> = (props) => {
@@ -16,9 +16,9 @@ const SearchComponent: React.StatelessComponent<Search> = (props) => {
         placeholder="Search"
         aria-label="Search"
         value={props.value}
-        onChange={event => props.onChange(event.target.value)}
+        onChange={event => props.onSearchUpdate(event.target.value)}
       />
-      <ButtonComponent onClick={props.onClick}>Search</ButtonComponent>
+      <ButtonComponent onClick={props.onSearchClick}>Search</ButtonComponent>
     </form>
   );
 }

@@ -30,6 +30,7 @@ const CreateAzApi = (queryConfig: AzQueryConfig = defaultAzQueryConfig): AzApi =
     async run() {
       try {
         const request = buildRequest(queryConfig);
+        console.log(`Running Query: ${request.url}`);
         const response = await fetch(request.url, request.options);
         if (!response.ok) {
           throw new Error(`Error Code: ${response.status} - ${response.statusText}`);

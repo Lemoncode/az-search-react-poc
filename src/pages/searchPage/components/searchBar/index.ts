@@ -1,0 +1,1 @@
+export { SearchBarComponent} from "./searchBarComponent";
