@@ -13,7 +13,7 @@ interface SearchBar {
 export const SearchBarComponent: React.StatelessComponent<SearchBar> = (props) => {
   return (
     <div className={styles.container}>
-      <BarComponent>
+      <BarComponent className={styles.searchBar}>
         <h3 className="navbar-brand">Search Page</h3>
         <SearchComponent inline
           value={props.value}
