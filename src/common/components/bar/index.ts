@@ -1,0 +1,1 @@
+export { BarComponent } from "./barComponent";

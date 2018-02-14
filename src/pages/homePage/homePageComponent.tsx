@@ -1,6 +1,7 @@
 import * as React from "react"
 import { Link } from 'react-router-dom';
 import { ButtonComponent } from "../../common/components/button";
+import { BarComponent } from "../../common/components/bar";
 const styles = require("./homePageComponent.scss");
 
 export const HomePageComponent: React.StatelessComponent<{}> = () => {
@@ -8,12 +9,11 @@ export const HomePageComponent: React.StatelessComponent<{}> = () => {
     <div className={styles.container}>
       <h2 className={`jumbotron ${styles.header}`}>React PoC</h2>
       <br />
-      <ul className="nav justify-content-center">
-        <li className="nav-item">
-          <Link to="/search">Search Page</Link>
-          {/* <a className="nav-link active" href="#">Active</a> */}
-        </li>
-      </ul>
+      <BarComponent center>
+        <Link className="btn btn-dark" to="/search">
+          <ButtonComponent>Search Page</ButtonComponent>
+        </Link>
+      </BarComponent>
     </div>
   )
 }
