@@ -3,7 +3,7 @@ import { Item, MapperToItem } from "./itemModel";
 export const mapMovieToItem: MapperToItem = (movie) => {
   return {
     title: movie.title,
-    thumbnail: movie.imdbPictureURL.replace('"',''),
+    thumbnail:  (movie.imdbPictureURL ? movie.imdbPictureURL.replace('"','') : ""),
     excerpt: movie.spanishTitle,
     extraFields: [
       movie.genreTags.join(", "),
