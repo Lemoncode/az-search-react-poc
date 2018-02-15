@@ -14,5 +14,12 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 50vw;
+}
+
+.button-group {
+  flex: 0 1 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }

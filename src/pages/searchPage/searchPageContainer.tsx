@@ -5,6 +5,7 @@ import { azApi } from "../../api";
 interface State {
   searchValue: string;
   searchResult: any;
+  drawerShow: boolean;
 }
 
 class SearchPageContainer extends React.Component<{}, State> {
@@ -14,7 +15,22 @@ class SearchPageContainer extends React.Component<{}, State> {
     this.state = {
       searchValue: "",
       searchResult: null,
+      drawerShow: false,
     };
+  }
+
+  private handleDrawerClose = () => {
+    this.setState({
+      ...this.state,
+      drawerShow: false,
+    });
+  }
+
+  private handleMenuClick = () => {
+    this.setState({
+      ...this.state,
+      drawerShow: true,
+    });
   }
 
   private handleSearchUpdate = (newValue) => {
@@ -41,10 +57,13 @@ class SearchPageContainer extends React.Component<{}, State> {
     return (
       <div>
         <SearchPageComponent
+          drawerShow={this.state.drawerShow}
+          onDrawerClose={this.handleDrawerClose}
           searchValue={this.state.searchValue}
           searchResult={this.state.searchResult}
           onSearchUpdate={this.handleSearchUpdate}
           onSearchClick={this.handleSearchClick}
+          onMenuClick={this.handleMenuClick}
         />
       </div>
     );    

@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.search-box-container {
+  flex: 1 1 auto;
+  margin: 0 1rem 0 0.3rem;
+}

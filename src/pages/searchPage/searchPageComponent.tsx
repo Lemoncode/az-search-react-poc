@@ -1,7 +1,10 @@
 import * as React from "react";
-import { SearchBarComponent } from "./components/searchBar";
+import { DrawerComponent } from "./components/drawer";
+import { SearchComponent } from "./components/search";
+import { BarComponent } from "./components/bar";
 import { ResultGridComponent } from "./components/resultGrid";
-import { activeMapper } from "../../model";
+import { activeMapper } from "./viewModel";
+
 const styles = require("./searchPage.scss");
 
 interface Props {
@@ -9,9 +12,12 @@ interface Props {
   searchResult: any;  
   onSearchClick: () => void;
   onSearchUpdate: (value: string) => void;
+  drawerShow: boolean;
+  onDrawerClose: () => void;
+  onMenuClick: () => void;
 }
 
-class SearchPageComponent extends React.PureComponent<Props, {}> {
+class SearchPageComponent extends React.Component<Props, {}> {
   constructor(props) {
     super(props);
   }
@@ -29,13 +35,27 @@ class SearchPageComponent extends React.PureComponent<Props, {}> {
   public render() {
     const mappedItems = this.mapResult(this.props.searchResult);
     return (
-      <div className={styles.container}>
-        <SearchBarComponent
-          value={this.props.searchValue}
-          onSearchUpdate={this.props.onSearchUpdate}
-          onSearchClick={this.props.onSearchClick}
-        />
-        <ResultGridComponent items={mappedItems} />
+      <div className={styles.pageContainer}>
+        <DrawerComponent 
+          show={this.props.drawerShow}
+          onClose={this.props.onDrawerClose}
+        >
+          <SearchComponent
+            value={this.props.searchValue}
+            onSearchClick={this.props.onSearchClick}
+            onSearchUpdate={this.props.onSearchUpdate}
+          />
+        </DrawerComponent>
+        <main className={styles.mainContainer}>
+          <BarComponent
+            value={this.props.searchValue}
+            onSearchUpdate={this.props.onSearchUpdate}
+            onSearchClick={this.props.onSearchClick}
+            onMenuClick={this.props.onMenuClick}
+          />
+          {JSON.stringify(mappedItems)}
+          {/* <ResultGridComponent items={mappedItems} /> */}
+        </main>
       </div>
     );
   }

@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Item } from "../../../../model/itemModel";
+import { Item } from "../../viewModel/itemModel";
 const styles = require("./resultItem.scss");
 
 interface ResultItem {

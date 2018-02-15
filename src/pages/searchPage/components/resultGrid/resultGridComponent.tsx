@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ResultItemComponent } from "./resultItemComponent";
-import { Item } from "../../../../model/itemModel";
+import { Item } from "../../viewModel/itemModel";
 const styles = require("./resultGrid.scss");
 
 interface ResultGrid {
