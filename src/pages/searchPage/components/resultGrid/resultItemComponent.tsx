@@ -15,10 +15,10 @@ export const ResultItemComponent: React.StatelessComponent<ResultItem> = (props)
     )) : null;
     
   return (
-    <div className={`card bg-light ${styles.item}`}>
+    <div className={`card bg-light border-secondary ${styles.item}`}>
       <img className={`card-img-top ${styles.itemThumbnail}`}
       src={props.item.thumbnail} alt="Preview Image" />
-      <div className={`card-body ${styles.itemCaption}`}>
+      <div className={`card-body text-white bg-secondary ${styles.itemCaption}`}>
         <h5 className="card-title">{props.item.title}</h5>
         <p className="card-text">{props.item.excerpt}</p>
       </div>

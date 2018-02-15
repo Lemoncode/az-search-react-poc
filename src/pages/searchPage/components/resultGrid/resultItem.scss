@@ -1,14 +1,14 @@
 .item {
   width: 18rem;
   margin: 1rem;
-}
 
-.item-thumbnail {
-  height: 24rem;
-}
+  &-thumbnail {
+    height: 24rem;
+  }
 
-.item-caption {
-  height: 9rem;
+  &-caption {
+    height: 9rem;
+  }
 }
 
 .ellipsis {
