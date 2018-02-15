@@ -1,7 +1,7 @@
 {
-  "name": "jfk-react-poc",
+  "name": "az-search-react-poc",
   "version": "1.0.0",
-  "description": "JFK Proof of Concept based on React",
+  "description": "Azure Search Proof of Concept based on React",
   "main": "app.js",
   "scripts": {
     "start": "webpack-dev-server --config=webpack.dev.config.js",
