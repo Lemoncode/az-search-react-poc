@@ -1,7 +1,8 @@
 import * as React from "react"
-import Button from 'material-ui/Button';
-import Search from 'material-ui-icons/Search';
-import TextField from 'material-ui/TextField';
+import Button from "material-ui/Button";
+import Search from "material-ui-icons/Search";
+import TextField from "material-ui/TextField";
+import { cnc } from "../../../../util";
 const styles = require("./search.scss");
 
 interface Search {
@@ -13,7 +14,7 @@ interface Search {
 
 const SearchComponent: React.StatelessComponent<Search> = (props) => {
   return (
-    <div className={`${styles.container} ${props.className || ""}`}>
+    <div className={cnc(props.className, styles.container)}>
       <Search />
       <div className={styles.searchBoxContainer}>
         <TextField
@@ -24,6 +25,7 @@ const SearchComponent: React.StatelessComponent<Search> = (props) => {
           value={props.value}
           onChange={event => props.onSearchUpdate(event.target.value)}
           fullWidth
+          autoFocus
         />
       </div>
       <Button

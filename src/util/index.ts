@@ -1,0 +1,1 @@
+export { cnc } from "./classNameComposer";

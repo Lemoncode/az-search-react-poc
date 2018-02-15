@@ -1,8 +1,9 @@
 export interface Item {
   title: string;
+  subtitle?: string;
   thumbnail?: string;
   excerpt?: string;
-  link?: string;
+  rating?: number;
   extraFields?: string[];
 }
 

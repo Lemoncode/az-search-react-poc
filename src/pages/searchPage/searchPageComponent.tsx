@@ -2,7 +2,7 @@ import * as React from "react";
 import { DrawerComponent } from "./components/drawer";
 import { SearchComponent } from "./components/search";
 import { BarComponent } from "./components/bar";
-import { ResultGridComponent } from "./components/resultGrid";
+import { GridComponent } from "./components/grid";
 import { activeMapper } from "./viewModel";
 
 const styles = require("./searchPage.scss");
@@ -53,8 +53,7 @@ class SearchPageComponent extends React.Component<Props, {}> {
             onSearchClick={this.props.onSearchClick}
             onMenuClick={this.props.onMenuClick}
           />
-          {JSON.stringify(mappedItems)}
-          {/* <ResultGridComponent items={mappedItems} /> */}
+          <GridComponent items={mappedItems} />
         </main>
       </div>
     );
