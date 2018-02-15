@@ -35,7 +35,9 @@ class GridItemComponent extends React.Component<GridItem, State> {
     const {item} = this.props;
 
     const rating = (item.rating >= 1.0) ? 
-      Array(Math.floor(item.rating)).fill(<StarIcon />) : null;
+      Array(Math.floor(item.rating)).fill(
+        <StarIcon classes={{root: styles.itemStar}}/>
+      ) : null;
 
     return (
       <div>
