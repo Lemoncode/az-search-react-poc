@@ -14,7 +14,7 @@ module.exports = {
 
   entry: {
     app: ['./app.tsx',],
-    vendor: ['../node_modules/bootstrap/dist/css/bootstrap.css'],
+    vendor: ['material-ui'],
   },
 
   module: {

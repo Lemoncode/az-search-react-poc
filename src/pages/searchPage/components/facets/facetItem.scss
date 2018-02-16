@@ -1,0 +1,14 @@
+.item {
+  flex: 1 1 auto;
+
+  &-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &-expand {
+    margin: 0 0 0 auto;
+  }
+}

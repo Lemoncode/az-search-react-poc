@@ -119,7 +119,7 @@ class GridItemComponent extends React.Component<GridItem, State> {
             aria-expanded={!this.state.expand}
             aria-label="Show more"
           >
-              <ExpandMoreIcon />
+            <ExpandMoreIcon />
           </IconButton>
         </CardActions>
         <Collapse in={this.state.expand} timeout="auto" unmountOnExit>

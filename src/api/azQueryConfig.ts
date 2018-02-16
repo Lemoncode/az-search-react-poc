@@ -8,7 +8,8 @@ interface AzQueryConfig {
   contentType: string;
   method: string;
   searchField: string;
-  facetField: string;
+  facetField?: string;
+  limit?: number;
 }
 
 const defaultAzQueryConfig: AzQueryConfig = {
@@ -22,6 +23,7 @@ const defaultAzQueryConfig: AzQueryConfig = {
   method: "GET",
   searchField: "*",
   facetField: "",
+  limit: 10
 }
 
 

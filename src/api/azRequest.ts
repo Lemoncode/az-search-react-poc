@@ -10,7 +10,8 @@ const buildURL = (config: AzQueryConfig): string => {
   const queryPath = `indexes/${config.serviceIndex}/docs?api-version=${config.apiVer}`;
   const queryPayload = 
     config.searchField ? `&search="${config.searchField}"` : "" + 
-    config.facetField ? `&facet="${config.facetField}"` : "";
+    config.facetField ? `&facet="${config.facetField}"` : "" + 
+    config.limit ? `&$top=${config.limit}` : "";
   return queryRoot + queryPath + queryPayload;
 }
 

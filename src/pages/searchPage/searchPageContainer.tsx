@@ -16,7 +16,7 @@ class SearchPageContainer extends React.Component<{}, State> {
     this.state = {
       searchValue: "",
       searchResult: null,
-      drawerShow: false, // TODO: Hide it by default
+      drawerShow: true, // TODO: Hide it by default
     };
   }
 
