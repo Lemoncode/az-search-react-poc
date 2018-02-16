@@ -4,9 +4,8 @@ import {
   ItemCollection,
   MapperToItem,
   FacetCollection,
-  mapMovieToItem,
-  movieFacetCollection,   
 } from "./viewModel";
+import { mapMovieToItem, movieFacetCollection } from "./configApi";
 import { azApi } from "../../api";
 import Reboot from "material-ui/Reboot";
 
@@ -57,7 +56,11 @@ class SearchPageContainer extends React.Component<{}, State> {
     });
   }
 
-  private mapResponse = (response): ItemCollection => {
+  private handleSearchClick = () => {
+    this.runSearch(this.state.searchValue);
+  }
+
+  private parseItemsFromResponse = (response): ItemCollection => {
     if (response && response.value) {
       return response.value.map(item => {
         return this.state.itemMapper(item);
@@ -67,14 +70,19 @@ class SearchPageContainer extends React.Component<{}, State> {
     }
   }
 
-  private handleSearchClick = () => {
+  private parseFacetsFromResponse = (response): FacetCollection => {
+    return [];
+  }
+
+  private runSearch = (value: string) => {
     azApi
-      .setSearch(this.state.searchValue)
+      .setSearch(value)
+      .setFacets(this.state.facetCollection.map(facet => facet.id))
       .run()
       .then(response => {
         this.setState({
           ...this.state,
-          itemCollection: this.mapResponse(response),
+          itemCollection: this.parseItemsFromResponse(response),
         });
       })        
       .catch(e => console.log(`AzApi error: ${e}`))

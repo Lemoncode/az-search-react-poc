@@ -35,6 +35,8 @@ class FacetItemComponent extends React.Component<FacetItem, State> {
   public render() {
     const { facet } = this.props;
 
+    if (!facet.valueSet) { return null }
+
     return (
       <Card classes={{root:style.item}} elevation={0}>
         <CardActions classes={{root: style.itemActions}}>

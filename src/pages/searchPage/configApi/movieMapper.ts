@@ -1,4 +1,4 @@
-import { MapperToItem } from "./itemModel";
+import { MapperToItem } from "../viewModel/itemModel";
 
 export const mapMovieToItem: MapperToItem = (movie) => {
   return {

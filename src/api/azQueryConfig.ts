@@ -8,7 +8,7 @@ interface AzQueryConfig {
   contentType: string;
   method: string;
   searchField: string;
-  facetField?: string;
+  facets?: string[];
   limit?: number;
 }
 
@@ -22,7 +22,7 @@ const defaultAzQueryConfig: AzQueryConfig = {
   contentType: "application/json",
   method: "GET",
   searchField: "*",
-  facetField: "",
+  facets: null,
   limit: 10
 }
 
