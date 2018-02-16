@@ -1,16 +1,18 @@
 @import "../../../../common/sass/_layout.scss";
 @import "../../../../common/sass/_colors.scss";
 
-.container {
+.raise {
   z-index: 2000;
   box-shadow: 3px 0 10px 0 rgba(0, 0, 0, 0.15);
+}
+
+.drawer-dock {
   margin-left: 0;
-  transition: margin-left 0.15s ease-out, box-shadow 0.15s ease-out;
+  transition: margin-left 0.15s ease-out;
 
   &-hidden {
-    @extend .container;
+    @extend .drawer-dock;
 
-    box-shadow: none;
     margin-left: -$drawer-max-width;
   }
 }

@@ -54,6 +54,7 @@ const DrawerForDesktopComponent: React.StatelessComponent<Drawer> = (props) => {
   return (
     <Hidden smDown>
       <Drawer classes={{ 
+          docked: props.show ? styles.drawerDock : styles.drawerDockHidden,
           paper: styles.drawerPaperDesktop,
         }}
         variant="persistent"
@@ -71,7 +72,7 @@ const DrawerForDesktopComponent: React.StatelessComponent<Drawer> = (props) => {
 
 const DrawerComponent: React.StatelessComponent<Drawer> = (props) => {
   return (
-    <div className={cnc(props.show ? styles.container : styles.containerHidden, props.className, "raised")}>
+    <div className={cnc(props.show && styles.raise, props.className)}>
       <DrawerForMobileComponent show={props.show} onClose={props.onClose}>
         {props.children}
       </DrawerForMobileComponent>
