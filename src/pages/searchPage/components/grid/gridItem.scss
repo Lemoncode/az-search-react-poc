@@ -41,8 +41,13 @@
   color: $colorSubtle;
 }
 
-.ellipsis {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+.tag {
+  margin: 0.15rem;
+
+  &-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    width: 100%;
+  }
 }
