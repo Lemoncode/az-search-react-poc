@@ -1,4 +1,4 @@
-import { Item, MapperToItem } from "./itemModel";
+import { MapperToItem } from "./itemModel";
 
 export const mapMovieToItem: MapperToItem = (movie) => {
   return {

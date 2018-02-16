@@ -1,35 +1,17 @@
 import * as React from "react";
 import Hidden from "material-ui/Hidden";
 import Drawer from "material-ui/Drawer";
-import Toolbar from "material-ui/Toolbar";
-import IconButton from "material-ui/IconButton";
-import Close from "material-ui-icons/Close";
-import Typography from "material-ui/Typography";
+import { DrawerBarComponent } from "./drawerBarComponent";
 import { cnc } from "../../../../util";
+
 const styles = require("./drawer.scss");
+
 
 interface Drawer {
   show: boolean;
   onClose: () => void;
   className?: string;
 }
-
-interface DrawerBar {
-  onClose: () => void;
-}
-
-const DrawerBarComponent: React.StatelessComponent<DrawerBar> = (props) => {
-  return (
-    <Toolbar classes={{root: styles.drawerBarContainer}}>
-      <Typography variant="title" color="inherit">
-        Movie Catalog
-      </Typography>
-      <IconButton color="inherit" aria-label="Close" onClick={props.onClose}>
-        <Close />
-      </IconButton>
-    </Toolbar>
-  );
-};
 
 const DrawerForMobileComponent: React.StatelessComponent<Drawer> = (props) => {
   return (

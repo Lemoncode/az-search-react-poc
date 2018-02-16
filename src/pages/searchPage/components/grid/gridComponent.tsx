@@ -1,10 +1,10 @@
 import * as React from "react";
 import { GridItemComponent } from "./gridItemComponent";
-import { Item } from "../../viewModel/itemModel";
+import { ItemCollection } from "../../viewModel/itemModel";
 const styles = require("./grid.scss");
 
 interface Grid {
-  items?: Item[];
+  items?: ItemCollection;
 }
 
 export const GridComponent: React.StatelessComponent<Grid> = (props) => {

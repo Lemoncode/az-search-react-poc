@@ -1,7 +1,4 @@
-import { Item, MapperToItem } from "./itemModel";
-import { mapMovieToItem } from "./movieMapper";
-
-const activeMapper: MapperToItem = mapMovieToItem;
-
-export { Item, MapperToItem } from "./itemModel";
-export { activeMapper };
+export { Item, ItemCollection, MapperToItem } from "./itemModel";
+export { Facet, FacetCollection } from "./facetModel";
+export { mapMovieToItem } from "./movieMapper";
+export { movieFacetCollection } from "./movieFacets";

@@ -7,4 +7,6 @@ export interface Item {
   extraFields?: string[];
 }
 
+export type ItemCollection = Item[];
+
 export type MapperToItem = (input: any) => Item;

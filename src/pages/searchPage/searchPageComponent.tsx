@@ -1,18 +1,20 @@
 import * as React from "react";
 import { DrawerComponent } from "./components/drawer";
 import { SearchComponent } from "./components/search";
+import { FacetListComponent } from "./components/facets";
 import { BarComponent } from "./components/bar";
 import { GridComponent } from "./components/grid";
-import { activeMapper } from "./viewModel";
+import { ItemCollection, FacetCollection } from "./viewModel";
 
 const styles = require("./searchPage.scss");
 
 interface Props {
+  drawerShow: boolean;
   searchValue: string;
-  searchResult: any;  
+  itemCollection: ItemCollection;
+  facetCollectionn: FacetCollection;
   onSearchClick: () => void;
   onSearchUpdate: (value: string) => void;
-  drawerShow: boolean;
   onDrawerClose: () => void;
   onMenuClick: () => void;
 }
@@ -22,18 +24,7 @@ class SearchPageComponent extends React.Component<Props, {}> {
     super(props);
   }
 
-  private mapResult = (result) => {
-    if (result && result.value) {
-      return result.value.map(item => {
-        return activeMapper(item);
-      })
-    } else {
-      return null;
-    }
-  }
-
   public render() {
-    const mappedItems = this.mapResult(this.props.searchResult);
     return (
       <div className={styles.pageContainer}>
         <DrawerComponent className={styles.drawerContainer}
@@ -45,6 +36,7 @@ class SearchPageComponent extends React.Component<Props, {}> {
             onSearchClick={this.props.onSearchClick}
             onSearchUpdate={this.props.onSearchUpdate}
           />
+          <FacetListComponent facets={this.props.facetCollectionn} />
         </DrawerComponent>
         <main className={styles.mainContainer}>
           <BarComponent
@@ -53,7 +45,7 @@ class SearchPageComponent extends React.Component<Props, {}> {
             onSearchClick={this.props.onSearchClick}
             onMenuClick={this.props.onMenuClick}
           />
-          <GridComponent items={mappedItems} />
+          <GridComponent items={this.props.itemCollection} />
         </main>
       </div>
     );

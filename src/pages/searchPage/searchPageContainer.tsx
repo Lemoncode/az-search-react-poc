@@ -1,12 +1,22 @@
 import * as React from "react";
 import { SearchPageComponent } from "./searchPageComponent";
+import {
+  ItemCollection,
+  MapperToItem,
+  FacetCollection,
+  mapMovieToItem,
+  movieFacetCollection,   
+} from "./viewModel";
 import { azApi } from "../../api";
 import Reboot from "material-ui/Reboot";
 
+
 interface State {
-  searchValue: string;
-  searchResult: any;
   drawerShow: boolean;
+  searchValue: string;
+  itemCollection: ItemCollection;
+  itemMapper: MapperToItem;
+  facetCollection: FacetCollection;  
 }
 
 class SearchPageContainer extends React.Component<{}, State> {
@@ -14,9 +24,11 @@ class SearchPageContainer extends React.Component<{}, State> {
     super(props);
 
     this.state = {
-      searchValue: "",
-      searchResult: null,
       drawerShow: true, // TODO: Hide it by default
+      searchValue: "",
+      itemCollection: [],
+      itemMapper: mapMovieToItem,
+      facetCollection: movieFacetCollection,      
     };
   }
 
@@ -45,6 +57,16 @@ class SearchPageContainer extends React.Component<{}, State> {
     });
   }
 
+  private mapResponse = (response): ItemCollection => {
+    if (response && response.value) {
+      return response.value.map(item => {
+        return this.state.itemMapper(item);
+      })
+    } else {
+      return null;
+    }
+  }
+
   private handleSearchClick = () => {
     azApi
       .setSearch(this.state.searchValue)
@@ -52,7 +74,7 @@ class SearchPageContainer extends React.Component<{}, State> {
       .then(response => {
         this.setState({
           ...this.state,
-          searchResult: response,
+          itemCollection: this.mapResponse(response),
         });
       })        
       .catch(e => console.log(`AzApi error: ${e}`))
@@ -66,7 +88,8 @@ class SearchPageContainer extends React.Component<{}, State> {
           drawerShow={this.state.drawerShow}
           onDrawerClose={this.handleDrawerClose}
           searchValue={this.state.searchValue}
-          searchResult={this.state.searchResult}
+          itemCollection={this.state.itemCollection}
+          facetCollectionn={this.state.facetCollection}
           onSearchUpdate={this.handleSearchUpdate}
           onSearchClick={this.handleSearchClick}
           onMenuClick={this.handleMenuClick}

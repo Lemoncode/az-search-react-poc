@@ -1,1 +1,1 @@
-export {} from "./";
+export { FacetListComponent } from "./facetListComponent";
