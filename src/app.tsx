@@ -5,7 +5,7 @@ import { HomePageContainer } from './pages/homePage';
 import { SearchPageContainer } from './pages/searchPage';
 
 ReactDOM.render(
-  <HashRouter>
+  <HashRouter>    
     <Switch>
       <Route exact={true} path="/" component={HomePageContainer} />
       <Route path="/search" component={SearchPageContainer} />

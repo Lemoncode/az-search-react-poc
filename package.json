@@ -11,7 +11,6 @@
   "author": "Javier Calzado",
   "license": "ISC",
   "dependencies": {
-    "bootstrap": "^4.0.0",
     "material-ui": "^1.0.0-beta.33",
     "material-ui-icons": "^1.0.0-beta.17",
     "react": "~16.1.1",

@@ -36,7 +36,7 @@ class SearchPageComponent extends React.Component<Props, {}> {
     const mappedItems = this.mapResult(this.props.searchResult);
     return (
       <div className={styles.pageContainer}>
-        <DrawerComponent 
+        <DrawerComponent className={styles.drawerContainer}
           show={this.props.drawerShow}
           onClose={this.props.onDrawerClose}
         >

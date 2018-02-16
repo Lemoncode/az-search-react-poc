@@ -1,10 +1,11 @@
 import * as React from "react"
 import { Item } from "../../viewModel/itemModel";
-import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card';
-import Collapse from 'material-ui/transitions/Collapse';
-import Typography from 'material-ui/Typography';
-import StarIcon from 'material-ui-icons/Star';
-import ExpandMoreIcon from 'material-ui-icons/ExpandMore';
+import Card, { CardActions, CardContent, CardMedia } from "material-ui/Card";
+import Collapse from "material-ui/transitions/Collapse";
+import Typography from "material-ui/Typography";
+import IconButton from "material-ui/IconButton";
+import StarIcon from "material-ui-icons/Star";
+import ExpandMoreIcon from "material-ui-icons/ExpandMore";
 const styles = require("./gridItem.scss");
 
 interface GridItem {
@@ -12,7 +13,7 @@ interface GridItem {
 }
 
 interface State {
-  collapsed: boolean;
+  expand: boolean;
 }
 
 const extraFields = (props) => (props.item.extraFields ? 
@@ -27,23 +28,28 @@ class GridItemComponent extends React.Component<GridItem, State> {
     super(props);
 
     this.state = {
-      collapsed: true,
+      expand: false,
     }
+  }
+
+  private handleExpand = () => {
+    this.setState({
+      ...this.state,
+      expand: !this.state.expand,
+    });
   }
     
   public render() {
     const {item} = this.props;
 
-    const rating = (item.rating >= 1.0) ? 
-      Array(Math.floor(item.rating)).fill(
-        <StarIcon classes={{root: styles.itemStar}}/>
-      ) : null;
+    const ratingStars = (item.rating >= 1.0) ? 
+      Array(Math.floor(item.rating)).fill(0).map((item, index) => (
+        <StarIcon key={index} classes={{root: styles.itemStar}}/>
+      )) : null;
 
     return (
-      <div>
-  
-      <Card className={styles.item} elevation={8}>
-        <CardMedia className={styles.itemMedia}
+      <Card classes={{root:styles.item}} elevation={8}>
+        <CardMedia classes={{root: styles.itemMedia}}
           component="img"
           src={item.thumbnail}        
           title={item.title}
@@ -57,29 +63,26 @@ class GridItemComponent extends React.Component<GridItem, State> {
             {item.excerpt}
           </Typography>
         </CardContent>
-        <CardActions>
-          {rating}
+        <CardActions classes={{root: styles.itemActions}}>
+          <div className={styles.itemRating}>
+            {ratingStars}
+          </div>          
+          <IconButton classes={{root: styles.itemExpand}}
+            onClick={this.handleExpand}
+            aria-expanded={!this.state.expand}
+            aria-label="Show more"
+          >
+              <ExpandMoreIcon />
+          </IconButton>
         </CardActions>
-        <Collapse>
-        </Collapse>
-  
+        <Collapse in={this.state.expand} timeout="auto" unmountOnExit>
+          <CardContent>
+            <Typography component="p">
+              This is the collapsed panel  
+            </Typography>
+          </CardContent>
+        </Collapse>  
       </Card>
-  
-      <div className={`card bg-light border-secondary ${styles.item}`}>
-        <img className={`card-img-top ${styles.itemThumbnail}`}
-        src={item.thumbnail} alt="Preview Image" />
-        <div className={`card-body text-white bg-secondary ${styles.itemCaption}`}>
-          <h5 className="card-title">{item.title}</h5>
-          <p className="card-text">{item.excerpt}</p>
-        </div>
-        { item.extraFields ? 
-            <ul className="list-group list-group-flush">
-              {extraFields}
-            </ul>    
-          : null }      
-      </div>
-  
-      </div>
     );
   }  
 }

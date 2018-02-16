@@ -1,6 +1,17 @@
+@import "../../../../common/sass/_layout.scss";
+@import "../../../../common/sass/_colors.scss";
+
 .container {
+  z-index: 2000;
+  box-shadow: 3px 0 10px 0 rgba(0, 0, 0, 0.15);
+  margin-left: 0;
+  transition: margin-left 0.15s ease-out, box-shadow 0.15s ease-out;
+
   &-hidden {
-    display: none;
+    @extend .container;
+
+    box-shadow: none;
+    margin-left: -$drawer-max-width;
   }
 }
 
@@ -12,13 +23,13 @@
 .drawer-paper {
   &-mobile {
     width: 85vw;
-    max-width: 25rem;
+    max-width: $drawer-max-width;
     padding: 0 1rem;
   }
 
   &-desktop {
     position: static !important;
-    width: 25rem;
+    width: $drawer-max-width;
     padding: 0 1rem;
   }
 }

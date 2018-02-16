@@ -1,6 +1,7 @@
 import * as React from "react";
 import { SearchPageComponent } from "./searchPageComponent";
 import { azApi } from "../../api";
+import Reboot from "material-ui/Reboot";
 
 interface State {
   searchValue: string;
@@ -15,7 +16,7 @@ class SearchPageContainer extends React.Component<{}, State> {
     this.state = {
       searchValue: "",
       searchResult: null,
-      drawerShow: true, // TODO: Hide it by default
+      drawerShow: false, // TODO: Hide it by default
     };
   }
 
@@ -26,11 +27,15 @@ class SearchPageContainer extends React.Component<{}, State> {
     });
   }
 
-  private handleMenuClick = () => {
+  private handleDrawerToggle = () => {
     this.setState({
       ...this.state,
-      drawerShow: true,
+      drawerShow: !this.state.drawerShow,
     });
+  }
+
+  private handleMenuClick = () => {
+    this.handleDrawerToggle();
   }
 
   private handleSearchUpdate = (newValue) => {
@@ -56,6 +61,7 @@ class SearchPageContainer extends React.Component<{}, State> {
   public render() {
     return (
       <div>
+        <Reboot/>
         <SearchPageComponent
           drawerShow={this.state.drawerShow}
           onDrawerClose={this.handleDrawerClose}

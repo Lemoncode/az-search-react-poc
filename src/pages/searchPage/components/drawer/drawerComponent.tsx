@@ -31,37 +31,53 @@ const DrawerBarComponent: React.StatelessComponent<DrawerBar> = (props) => {
   );
 };
 
+const DrawerForMobileComponent: React.StatelessComponent<Drawer> = (props) => {
+  return (
+    <Hidden mdUp>
+      <Drawer classes={{ paper: styles.drawerPaperMobile }}
+        variant="temporary"
+        anchor="left"
+        open={props.show}
+        onClose={props.onClose}
+        ModalProps={{
+          keepMounted: true, // Better open performance on mobile.
+        }}
+      >
+        <DrawerBarComponent onClose={props.onClose} />
+        {props.children}
+      </Drawer>
+    </Hidden>
+  );
+};
+
+const DrawerForDesktopComponent: React.StatelessComponent<Drawer> = (props) => {
+  return (
+    <Hidden smDown>
+      <Drawer classes={{ 
+          paper: styles.drawerPaperDesktop,
+        }}
+        variant="persistent"
+        anchor="left"
+        open={props.show}
+        onClose={props.onClose}
+        elevation={8}
+      >
+        <DrawerBarComponent onClose={props.onClose} />
+        {props.children}
+      </Drawer>
+    </Hidden>
+  );
+};
+
 const DrawerComponent: React.StatelessComponent<Drawer> = (props) => {
   return (
-    <div className={cnc(!props.show && styles.containerHidden, props.className)}>
-      {/* Drawer for Mobile Devices */}
-      <Hidden mdUp>
-        <Drawer classes={{ paper: styles.drawerPaperMobile }}
-          variant="temporary"
-          anchor="left"
-          open={props.show}
-          onClose={props.onClose}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-        >
-          <DrawerBarComponent onClose={props.onClose}/>
-          {props.children}
-        </Drawer>
-      </Hidden>
-      {/* Drawer for Desktop Devices */}
-      <Hidden smDown implementation="css">
-        <Drawer classes={{ paper: styles.drawerPaperDesktop }}
-          variant="persistent"
-          anchor="left"
-          open={props.show}
-          onClose={props.onClose}
-          elevation={8}
-        >
-          <DrawerBarComponent onClose={props.onClose}/>
-          {props.children}
-        </Drawer>
-      </Hidden>
+    <div className={cnc(props.show ? styles.container : styles.containerHidden, props.className, "raised")}>
+      <DrawerForMobileComponent show={props.show} onClose={props.onClose}>
+        {props.children}
+      </DrawerForMobileComponent>
+      <DrawerForDesktopComponent show={props.show} onClose={props.onClose}>
+        {props.children}
+      </DrawerForDesktopComponent>
     </div>
   );
 };

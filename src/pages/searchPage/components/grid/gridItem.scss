@@ -1,20 +1,37 @@
 @import "../../../../common/sass/_colors.scss";
 
 .item {
-  width: 18rem;
+  width: 19rem;
   margin: 1rem;
-  // height: 36rem;
 
   &-media {
-    height: 24rem;
+    height: 26rem;
   }
 
   &-caption {
     //
   }
 
+  &-rating {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
   &-star {
     width: 16px;
+  }
+
+  &-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &-expand {
+    margin: 0 0 0 auto;
   }
 }
 
