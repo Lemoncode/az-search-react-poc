@@ -7,7 +7,7 @@ import MenuIcon from "material-ui-icons/Menu";
 import HomeIcon from 'material-ui-icons/Home';
 import IconButton from "material-ui/IconButton";
 
-const styles = require("./bar.scss");
+const style = require("./bar.style.scss");
 
 interface Bar {
   value: string;
@@ -19,13 +19,13 @@ interface Bar {
 const BarComponent: React.StatelessComponent<Bar> = (props) => {
   return (
     <AppBar position="static">
-      <Toolbar classes={{root: styles.toolbar}}>
-        <IconButton className={styles.toolbarMenuButton} color="inherit"
+      <Toolbar classes={{root: style.toolbar}}>
+        <IconButton className={style.toolbarMenuButton} color="inherit"
           aria-label="Menu" onClick={props.onMenuClick}
         >
           <MenuIcon />
         </IconButton>
-        <Typography className={styles.toolbarTitle} variant="title" color="inherit" >
+        <Typography className={style.toolbarTitle} variant="title" color="inherit" >
           Azure Search
         </Typography>
         <Link to="/">

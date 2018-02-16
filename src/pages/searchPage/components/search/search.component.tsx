@@ -3,7 +3,9 @@ import Button from "material-ui/Button";
 import Search from "material-ui-icons/Search";
 import TextField from "material-ui/TextField";
 import { cnc } from "../../../../util";
-const styles = require("./search.scss");
+
+const style = require("./search.style.scss");
+
 
 interface Search {
   value: string;
@@ -14,9 +16,9 @@ interface Search {
 
 const SearchComponent: React.StatelessComponent<Search> = (props) => {
   return (
-    <div className={cnc(props.className, styles.container)}>
+    <div className={cnc(props.className, style.container)}>
       <Search />
-      <div className={styles.searchBoxContainer}>
+      <div className={style.searchBoxContainer}>
         <TextField
           type="search"
           name="searchBox"

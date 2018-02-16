@@ -6,7 +6,7 @@ import ExpandMoreIcon from "material-ui-icons/ExpandMore";
 import Collapse from "material-ui/transitions/Collapse";
 import { Facet } from "../../viewModel";
 
-const styles = require("./facetItem.scss");
+const style = require("./facetItem.style.scss");
 
 interface FacetItem {
   facet: Facet;
@@ -36,12 +36,12 @@ class FacetItemComponent extends React.Component<FacetItem, State> {
     const { facet } = this.props;
 
     return (
-      <Card classes={{root:styles.item}} elevation={2}>
-        <CardActions classes={{root: styles.itemActions}}>
-          <Typography variant="headline" component="h3">
+      <Card classes={{root:style.item}} elevation={0}>
+        <CardActions classes={{root: style.itemActions}}>
+          <Typography variant="title">
             {facet.displayName}
           </Typography>
-          <IconButton classes={{root: styles.itemExpand}}
+          <IconButton classes={{root: style.itemExpand}}
             onClick={this.handleExpand}
             aria-expanded={!this.state.expand}
             aria-label="Show more"
@@ -50,8 +50,10 @@ class FacetItemComponent extends React.Component<FacetItem, State> {
           </IconButton>
         </CardActions>
         <Collapse in={this.state.expand} timeout="auto">
-          FACET CONTENT HERE
-          {facet.control}
+          <div className={style.controlContainer}>
+            FACET CONTENT HERE
+            {facet.control}
+          </div>          
         </Collapse>  
       </Card>
     );

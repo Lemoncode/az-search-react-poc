@@ -9,9 +9,10 @@ import Chip from 'material-ui/Chip';
 import StarIcon from "material-ui-icons/Star";
 import ExpandMoreIcon from "material-ui-icons/ExpandMore";
 
-const styles = require("./gridItem.scss");
+const style = require("./item.style.scss");
 
-interface GridItem {
+
+interface Props {
   item: Item;
 }
 
@@ -21,13 +22,13 @@ interface State {
 
 const ratingStars = (item: Item) => ((item.rating >= 1.0) ? 
   Array(Math.floor(item.rating)).fill(0).map((item, index) => (
-    <StarIcon key={index} classes={{root: styles.itemStar}}/>
+    <StarIcon key={index} classes={{root: style.itemStar}}/>
   )) : null
 );
 
-const GridItemMedia: React.StatelessComponent<GridItem> = (props) => {
+const ItemMedia: React.StatelessComponent<Props> = (props) => {
   return (
-    <CardMedia classes={{root: styles.itemMedia}}
+    <CardMedia classes={{root: style.itemMedia}}
       component="img"
       src={props.item.thumbnail}        
       title={props.item.title}
@@ -35,12 +36,12 @@ const GridItemMedia: React.StatelessComponent<GridItem> = (props) => {
   );
 }
 
-const GridItemCaption: React.StatelessComponent<GridItem> = (props) => {
+const ItemCaption: React.StatelessComponent<Props> = (props) => {
   return (
-    <CardContent classes={{root: styles.itemCaption}}>
+    <CardContent classes={{root: style.itemCaption}}>
       <Typography variant="headline" component="h2">
         {props.item.title} 
-        <span className={styles.subtitle}>{props.item.subtitle}</span>
+        <span className={style.subtitle}>{props.item.subtitle}</span>
       </Typography>        
       <Typography component="p">
         {props.item.excerpt}
@@ -54,9 +55,9 @@ const generateExtraFieldContent = (field: any) => {
     return <ListItemText primary={field} />
   } else if (field instanceof Array) {
     return (
-      <div className={styles.tagContainer}>
+      <div className={style.tagContainer}>
         {field.map((tag, tagIndex) => 
-          <Chip label={tag} key={tagIndex} classes={{root: styles.tag}} />
+          <Chip label={tag} key={tagIndex} classes={{root: style.tag}} />
         )}
       </div>);
   } else {
@@ -72,7 +73,7 @@ const generateExtraField = (field: any, index: number) => (
   ) : null
 );
 
-const GridItemExtraFieldList: React.StatelessComponent<GridItem> = (props) => {
+const ItemExtraFieldList: React.StatelessComponent<Props> = (props) => {
   if (props.item.extraFields) {
     return (
       <CardContent><List>
@@ -87,7 +88,7 @@ const GridItemExtraFieldList: React.StatelessComponent<GridItem> = (props) => {
   }
 }
 
-class GridItemComponent extends React.Component<GridItem, State> {
+class ItemComponent extends React.Component<Props, State> {
   constructor(props) {
     super(props);
 
@@ -107,14 +108,14 @@ class GridItemComponent extends React.Component<GridItem, State> {
     const {item} = this.props;
 
     return (
-      <Card classes={{root:styles.item}} elevation={8}>
-        <GridItemMedia item={item} />
-        <GridItemCaption item={item} />
-        <CardActions classes={{root: styles.itemActions}}>
-          <div className={styles.itemRating}>
+      <Card classes={{root:style.item}} elevation={8}>
+        <ItemMedia item={item} />
+        <ItemCaption item={item} />
+        <CardActions classes={{root: style.itemActions}}>
+          <div className={style.itemRating}>
             {ratingStars(item)}
           </div>          
-          <IconButton classes={{root: styles.itemExpand}}
+          <IconButton classes={{root: style.itemExpand}}
             onClick={this.handleExpand}
             aria-expanded={!this.state.expand}
             aria-label="Show more"
@@ -123,11 +124,11 @@ class GridItemComponent extends React.Component<GridItem, State> {
           </IconButton>
         </CardActions>
         <Collapse in={this.state.expand} timeout="auto" unmountOnExit>
-          <GridItemExtraFieldList item={item} />
+          <ItemExtraFieldList item={item} />
         </Collapse>  
       </Card>
     );
   }  
 }
 
-export { GridItemComponent };
+export { ItemComponent };

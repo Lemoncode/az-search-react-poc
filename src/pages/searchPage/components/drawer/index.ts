@@ -1,1 +1,1 @@
-export { DrawerComponent } from "./drawerComponent";
+export { DrawerComponent } from "./drawer.component";

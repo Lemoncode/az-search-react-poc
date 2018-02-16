@@ -1,12 +1,14 @@
 import * as React from "react"
-const styles = require("./name.scss");
+
+const style = require("./name.style.scss");
+
 
 interface Name {
 }
 
 export const NameComponent: React.StatelessComponent<Name> = (props) => {
   return (
-    <div className={styles.container}>
+    <div className={style.container}>
       {props.children}
     </div>
   )

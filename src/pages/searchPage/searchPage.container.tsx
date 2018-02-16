@@ -1,5 +1,5 @@
 import * as React from "react";
-import { SearchPageComponent } from "./searchPageComponent";
+import { SearchPageComponent } from "./searchPage.component";
 import {
   ItemCollection,
   MapperToItem,
@@ -89,7 +89,7 @@ class SearchPageContainer extends React.Component<{}, State> {
           onDrawerClose={this.handleDrawerClose}
           searchValue={this.state.searchValue}
           itemCollection={this.state.itemCollection}
-          facetCollectionn={this.state.facetCollection}
+          facetCollection={this.state.facetCollection}
           onSearchUpdate={this.handleSearchUpdate}
           onSearchClick={this.handleSearchClick}
           onMenuClick={this.handleMenuClick}

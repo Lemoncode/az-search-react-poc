@@ -1,1 +1,1 @@
-export { FacetListComponent } from "./facetListComponent";
+export { FacetViewComponent } from "./facetView.component";

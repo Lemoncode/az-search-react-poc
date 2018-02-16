@@ -1,5 +1,6 @@
 .item {
   flex: 1 1 auto;
+  margin: 0;
 
   &-actions {
     display: flex;
@@ -11,4 +12,8 @@
   &-expand {
     margin: 0 0 0 auto;
   }
+}
+
+.control-container {
+  margin-left: 2rem;
 }

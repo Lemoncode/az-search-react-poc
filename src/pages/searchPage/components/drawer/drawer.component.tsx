@@ -1,10 +1,10 @@
 import * as React from "react";
 import Hidden from "material-ui/Hidden";
 import Drawer from "material-ui/Drawer";
-import { DrawerBarComponent } from "./drawerBarComponent";
+import { DrawerBarComponent } from "./drawerBar.component";
 import { cnc } from "../../../../util";
 
-const styles = require("./drawer.scss");
+const style = require("./drawer.style.scss");
 
 
 interface Drawer {
@@ -16,7 +16,7 @@ interface Drawer {
 const DrawerForMobileComponent: React.StatelessComponent<Drawer> = (props) => {
   return (
     <Hidden mdUp>
-      <Drawer classes={{ paper: styles.drawerPaperMobile }}
+      <Drawer classes={{ paper: style.drawerPaperMobile }}
         variant="temporary"
         anchor="left"
         open={props.show}
@@ -36,8 +36,8 @@ const DrawerForDesktopComponent: React.StatelessComponent<Drawer> = (props) => {
   return (
     <Hidden smDown>
       <Drawer classes={{ 
-          docked: props.show ? styles.drawerDock : styles.drawerDockHidden,
-          paper: styles.drawerPaperDesktop,
+          docked: props.show ? style.drawerDock : style.drawerDockHidden,
+          paper: style.drawerPaperDesktop,
         }}
         variant="persistent"
         anchor="left"
@@ -54,7 +54,7 @@ const DrawerForDesktopComponent: React.StatelessComponent<Drawer> = (props) => {
 
 const DrawerComponent: React.StatelessComponent<Drawer> = (props) => {
   return (
-    <div className={cnc(props.show && styles.raise, props.className)}>
+    <div className={cnc(props.show && style.raise, props.className)}>
       <DrawerForMobileComponent show={props.show} onClose={props.onClose}>
         {props.children}
       </DrawerForMobileComponent>

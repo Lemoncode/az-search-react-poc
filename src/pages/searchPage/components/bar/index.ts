@@ -1,1 +1,1 @@
-export { BarComponent} from "./barComponent";
+export { BarComponent} from "./bar.component";

@@ -4,7 +4,7 @@ import IconButton from "material-ui/IconButton";
 import Close from "material-ui-icons/Close";
 import Typography from "material-ui/Typography";
 
-const styles = require("./drawerBar.scss");
+const style = require("./drawerBar.style.scss");
 
 
 interface DrawerBar {
@@ -13,8 +13,8 @@ interface DrawerBar {
 
 const DrawerBarComponent: React.StatelessComponent<DrawerBar> = (props) => {
   return (
-    <Toolbar classes={{root: styles.drawerBarContainer}}>
-      <Typography variant="title" color="inherit">
+    <Toolbar classes={{root: style.drawerBarContainer}}>
+      <Typography variant="headline" color="inherit">
         Movie Catalog
       </Typography>
       <IconButton color="inherit" aria-label="Close" onClick={props.onClose}>

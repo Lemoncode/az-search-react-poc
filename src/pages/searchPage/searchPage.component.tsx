@@ -1,18 +1,18 @@
 import * as React from "react";
+import { BarComponent } from "./components/bar";
 import { DrawerComponent } from "./components/drawer";
 import { SearchComponent } from "./components/search";
-import { FacetListComponent } from "./components/facets";
-import { BarComponent } from "./components/bar";
-import { GridComponent } from "./components/grid";
+import { ItemViewComponent } from "./components/item";
+import { FacetViewComponent } from "./components/facets";
 import { ItemCollection, FacetCollection } from "./viewModel";
 
-const styles = require("./searchPage.scss");
+const style = require("./searchPage.style.scss");
 
 interface Props {
   drawerShow: boolean;
   searchValue: string;
   itemCollection: ItemCollection;
-  facetCollectionn: FacetCollection;
+  facetCollection: FacetCollection;
   onSearchClick: () => void;
   onSearchUpdate: (value: string) => void;
   onDrawerClose: () => void;
@@ -26,8 +26,8 @@ class SearchPageComponent extends React.Component<Props, {}> {
 
   public render() {
     return (
-      <div className={styles.pageContainer}>
-        <DrawerComponent className={styles.drawerContainer}
+      <div className={style.pageContainer}>
+        <DrawerComponent className={style.drawerContainer}
           show={this.props.drawerShow}
           onClose={this.props.onDrawerClose}
         >
@@ -36,16 +36,16 @@ class SearchPageComponent extends React.Component<Props, {}> {
             onSearchClick={this.props.onSearchClick}
             onSearchUpdate={this.props.onSearchUpdate}
           />
-          <FacetListComponent facets={this.props.facetCollectionn} />
+          <FacetViewComponent facets={this.props.facetCollection} />
         </DrawerComponent>
-        <main className={styles.mainContainer}>
+        <main className={style.mainContainer}>
           <BarComponent
             value={this.props.searchValue}
             onSearchUpdate={this.props.onSearchUpdate}
             onSearchClick={this.props.onSearchClick}
             onMenuClick={this.props.onMenuClick}
           />
-          <GridComponent items={this.props.itemCollection} />
+          <ItemViewComponent items={this.props.itemCollection} />
         </main>
       </div>
     );
