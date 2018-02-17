@@ -1,6 +1,6 @@
-import { FacetCollection } from "../viewModel/facetModel";
+import { FacetCollection } from "../../viewModel/facetModel";
 
-export const movieFacetCollection: FacetCollection = [
+const facetCollection: FacetCollection = [
   {
     id: "genreTags",
     displayName: "Genre",
@@ -16,3 +16,5 @@ export const movieFacetCollection: FacetCollection = [
     selected: null,
   },
 ];
+
+export { facetCollection };

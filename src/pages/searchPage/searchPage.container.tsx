@@ -1,20 +1,15 @@
 import * as React from "react";
 import { SearchPageComponent } from "./searchPage.component";
-import {
-  ItemCollection,
-  MapperToItem,
-  FacetCollection,
-} from "./viewModel";
-import { mapMovieToItem, movieFacetCollection } from "./configApi";
-import { azApi } from "../../api";
-import Reboot from "material-ui/Reboot";
+import { ItemCollection, FacetCollection,} from "./viewModel";
+import { Service } from "./serviceModel";
+import { registeredServices } from "./services";
 
 
 interface State {
   drawerShow: boolean;
   searchValue: string;
+  activeService: Service;
   itemCollection: ItemCollection;
-  itemMapper: MapperToItem;
   facetCollection: FacetCollection;  
 }
 
@@ -25,9 +20,9 @@ class SearchPageContainer extends React.Component<{}, State> {
     this.state = {
       drawerShow: true, // TODO: Hide it by default
       searchValue: "",
-      itemCollection: [],
-      itemMapper: mapMovieToItem,
-      facetCollection: movieFacetCollection,      
+      activeService: registeredServices.movieService.service,
+      itemCollection: null,      
+      facetCollection: null,
     };
   }
 
@@ -56,42 +51,25 @@ class SearchPageContainer extends React.Component<{}, State> {
     });
   }
 
-  private handleSearchClick = () => {
-    this.runSearch(this.state.searchValue);
-  }
-
-  private parseItemsFromResponse = (response): ItemCollection => {
-    if (response && response.value) {
-      return response.value.map(item => {
-        return this.state.itemMapper(item);
-      })
-    } else {
-      return null;
-    }
-  }
-
-  private parseFacetsFromResponse = (response): FacetCollection => {
-    return [];
-  }
-
-  private runSearch = (value: string) => {
-    azApi
-      .setSearch(value)
-      .setFacets(this.state.facetCollection.map(facet => facet.id))
-      .run()
-      .then(response => {
+  private handleSearchClick = () => {    
+    this.runSearch(this.state.searchValue)
+      .then(searchOutput => {
         this.setState({
           ...this.state,
-          itemCollection: this.parseItemsFromResponse(response),
-        });
-      })        
-      .catch(e => console.log(`AzApi error: ${e}`))
+          itemCollection: searchOutput.itemCollection,
+          facetCollection: searchOutput.facetCollection,
+        })
+      })
+      .catch(e => { throw Error(e) });
+  }
+
+  private runSearch = async (value: string) => {
+    return await this.state.activeService.search(value);
   }
 
   public render() {
     return (
       <div>
-        <Reboot/>
         <SearchPageComponent
           drawerShow={this.state.drawerShow}
           onDrawerClose={this.handleDrawerClose}

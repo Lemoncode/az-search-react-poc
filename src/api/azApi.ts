@@ -43,6 +43,4 @@ const CreateAzApi = (queryConfig: AzQueryConfig = defaultAzQueryConfig): AzApi =
   };
 };
 
-const azApi = CreateAzApi();
-
-export { AzApi, azApi };
+export { AzApi, CreateAzApi };

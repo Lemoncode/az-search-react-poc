@@ -10,13 +10,13 @@ interface FacetView {
 }
 
 const FacetViewComponent: React.StatelessComponent<FacetView> = (props) => {
-  return (
+  return props.facets ? (
     <div className={style.container}>
       { props.facets.map((facet, index) => (
         <FacetItemComponent facet={facet} key={index} />
       ))}
     </div>
-  )
+  ) : null;
 }
 
 export { FacetViewComponent };

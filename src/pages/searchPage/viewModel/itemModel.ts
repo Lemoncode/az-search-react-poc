@@ -8,5 +8,3 @@ export interface Item {
 }
 
 export type ItemCollection = Item[];
-
-export type MapperToItem = (input: any) => Item;

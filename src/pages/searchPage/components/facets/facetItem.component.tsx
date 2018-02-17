@@ -53,8 +53,8 @@ class FacetItemComponent extends React.Component<FacetItem, State> {
         </CardActions>
         <Collapse in={this.state.expand} timeout="auto">
           <div className={style.controlContainer}>
-            FACET CONTENT HERE
-            {facet.control}
+            Facet Control Values:
+            {JSON.stringify(facet.valueSet)}
           </div>          
         </Collapse>  
       </Card>

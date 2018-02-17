@@ -1,0 +1,1 @@
+export { registeredServices } from "./registerServices";
