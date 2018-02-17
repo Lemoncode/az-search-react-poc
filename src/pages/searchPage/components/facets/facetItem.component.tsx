@@ -1,10 +1,9 @@
 import * as React from "react"
 import Card, { CardActions, CardContent } from "material-ui/Card";
 import Typography from "material-ui/Typography";
-import IconButton from "material-ui/IconButton";
-import ExpandMoreIcon from "material-ui-icons/ExpandMore";
 import Collapse from "material-ui/transitions/Collapse";
 import { Facet } from "../../viewModel";
+import { Chevron } from "../../../../common/components/chevron";
 
 const style = require("./facetItem.style.scss");
 
@@ -13,7 +12,7 @@ interface FacetItem {
 }
 
 interface State {
-  expand: boolean;
+  expanded: boolean;
 }
 
 class FacetItemComponent extends React.Component<FacetItem, State> {
@@ -21,19 +20,20 @@ class FacetItemComponent extends React.Component<FacetItem, State> {
     super(props);
 
     this.state = {
-      expand: false,
+      expanded: false,
     }
   }
 
-  private handleExpand = () => {
+  private toggleExpand = () => {
     this.setState({
       ...this.state,
-      expand: !this.state.expand,
+      expanded: !this.state.expanded,
     });
   }
     
   public render() {
     const { facet } = this.props;
+    const { expanded } = this.state;
 
     if (!facet.valueSet) { return null }
 
@@ -43,15 +43,9 @@ class FacetItemComponent extends React.Component<FacetItem, State> {
           <Typography variant="title">
             {facet.displayName}
           </Typography>
-          <IconButton classes={{root: style.itemExpand}}
-            onClick={this.handleExpand}
-            aria-expanded={!this.state.expand}
-            aria-label="Show more"
-          >
-            <ExpandMoreIcon />
-          </IconButton>
+          <Chevron onClick={this.toggleExpand} expanded={expanded}/>
         </CardActions>
-        <Collapse in={this.state.expand} timeout="auto">
+        <Collapse in={expanded} timeout="auto">
           <div className={style.controlContainer}>
             Facet Control Values:
             {JSON.stringify(facet.valueSet)}

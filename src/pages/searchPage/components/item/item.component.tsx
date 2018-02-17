@@ -1,13 +1,13 @@
 import * as React from "react"
 import { Item } from "../../viewModel/itemModel";
+import { Chevron } from "../../../../common/components/chevron";
 import Card, { CardActions, CardContent, CardMedia } from "material-ui/Card";
 import List, { ListItem, ListItemIcon, ListItemText} from 'material-ui/List';
 import Collapse from "material-ui/transitions/Collapse";
 import Typography from "material-ui/Typography";
-import IconButton from "material-ui/IconButton";
 import Chip from 'material-ui/Chip';
 import StarIcon from "material-ui-icons/Star";
-import ExpandMoreIcon from "material-ui-icons/ExpandMore";
+
 
 const style = require("./item.style.scss");
 
@@ -17,7 +17,7 @@ interface Props {
 }
 
 interface State {
-  expand: boolean;
+  expanded: boolean;
 }
 
 const ratingStars = (item: Item) => ((item.rating >= 1.0) ? 
@@ -93,14 +93,14 @@ class ItemComponent extends React.Component<Props, State> {
     super(props);
 
     this.state = {
-      expand: false,
+      expanded: false,
     }
   }
 
-  private handleExpand = () => {
+  private toggleExpand = () => {
     this.setState({
       ...this.state,
-      expand: !this.state.expand,
+      expanded: !this.state.expanded,
     });
   }
     
@@ -115,15 +115,10 @@ class ItemComponent extends React.Component<Props, State> {
           <div className={style.itemRating}>
             {ratingStars(item)}
           </div>          
-          <IconButton classes={{root: style.itemExpand}}
-            onClick={this.handleExpand}
-            aria-expanded={!this.state.expand}
-            aria-label="Show more"
-          >
-            <ExpandMoreIcon />
-          </IconButton>
+          <Chevron className={style.itemChevron}
+            onClick={this.toggleExpand} expanded={this.state.expanded} />
         </CardActions>
-        <Collapse in={this.state.expand} timeout="auto" unmountOnExit>
+        <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
           <ItemExtraFieldList item={item} />
         </Collapse>  
       </Card>
