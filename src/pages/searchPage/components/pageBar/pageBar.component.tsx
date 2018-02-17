@@ -7,16 +7,14 @@ import MenuIcon from "material-ui-icons/Menu";
 import HomeIcon from 'material-ui-icons/Home';
 import IconButton from "material-ui/IconButton";
 
-const style = require("./bar.style.scss");
+const style = require("./pageBar.style.scss");
 
 interface Bar {
   value: string;
-  onSearchClick: () => void;
-  onSearchUpdate: (value: string) => void;
   onMenuClick: () => void;
 }
 
-const BarComponent: React.StatelessComponent<Bar> = (props) => {
+const PageBarComponent: React.StatelessComponent<Bar> = (props) => {
   return (
     <AppBar position="static">
       <Toolbar classes={{root: style.toolbar}}>
@@ -36,4 +34,4 @@ const BarComponent: React.StatelessComponent<Bar> = (props) => {
   )
 }
 
-export { BarComponent };
+export { PageBarComponent };

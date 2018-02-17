@@ -41,7 +41,9 @@ const ItemCaption: React.StatelessComponent<Props> = (props) => {
     <CardContent classes={{root: style.itemCaption}}>
       <Typography variant="headline" component="h2">
         {props.item.title} 
-        <span className={style.subtitle}>{props.item.subtitle}</span>
+        <span className={style.subtitle}>
+          {props.item.subtitle}
+        </span>
       </Typography>        
       <Typography component="p">
         {props.item.excerpt}

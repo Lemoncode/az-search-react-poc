@@ -9,33 +9,38 @@ const style = require("./search.style.scss");
 
 interface Search {
   value: string;
-  onSearchClick: () => void;
+  onSearchSubmit: () => void;
   onSearchUpdate: (value: string) => void;
   className?: string;
+}
+
+const captureEnter = (props) => (e) => {
+  if (e.key === "Enter") {
+    props.onSearchSubmit();
+  }
 }
 
 const SearchComponent: React.StatelessComponent<Search> = (props) => {
   return (
     <div className={cnc(props.className, style.container)}>
-      <Search />
-      <div className={style.searchBoxContainer}>
-        <TextField
-          type="search"
-          name="searchBox"
-          id="searchBox"
-          placeholder="Type here..."
-          value={props.value}
-          onChange={event => props.onSearchUpdate(event.target.value)}
-          fullWidth
-          autoFocus
-        />
-      </div>
-      <Button
+      <TextField
+        type="search"
+        name="searchBox"
+        id="searchBox"
+        placeholder="Search..."
+        value={props.value}
+        onChange={event => props.onSearchUpdate(event.target.value)}
+        onKeyPress={captureEnter(props)}
+        fullWidth
+        autoFocus
+      />
+      <Button classes={{root: style.button}}
         variant="raised"
+        size="small"
         color="secondary"
-        onClick={props.onSearchClick}
+        onClick={props.onSearchSubmit}
       >
-        Search
+        <Search />
       </Button>
     </div>
   );

@@ -51,7 +51,7 @@ class SearchPageContainer extends React.Component<{}, State> {
     });
   }
 
-  private handleSearchClick = () => {    
+  private handleSearchSubmit = () => {    
     this.runSearch(this.state.searchValue)
       .then(searchOutput => {
         this.setState({
@@ -77,7 +77,7 @@ class SearchPageContainer extends React.Component<{}, State> {
           itemCollection={this.state.itemCollection}
           facetCollection={this.state.facetCollection}
           onSearchUpdate={this.handleSearchUpdate}
-          onSearchClick={this.handleSearchClick}
+          onSearchSubmit={this.handleSearchSubmit}
           onMenuClick={this.handleMenuClick}
         />
       </div>

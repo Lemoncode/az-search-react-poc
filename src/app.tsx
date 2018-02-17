@@ -8,16 +8,14 @@ import { MuiThemeProvider } from 'material-ui/styles';
 import { theme } from "./app.theme";
 
 ReactDOM.render(
-  <div>
+  <MuiThemeProvider theme={theme}>
     <Reboot/>
-    <MuiThemeProvider theme={theme}>
-      <HashRouter>
-        <Switch>
-          <Route exact={true} path="/" component={HomePageContainer} />
-          <Route path="/search" component={SearchPageContainer} />
-        </Switch>
-      </HashRouter>
-    </MuiThemeProvider>
-  </div>
+    <HashRouter>
+      <Switch>
+        <Route exact={true} path="/" component={HomePageContainer} />
+        <Route path="/search" component={SearchPageContainer} />
+      </Switch>
+    </HashRouter>
+  </MuiThemeProvider>
   , document.getElementById('app')
 );

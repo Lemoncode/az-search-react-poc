@@ -1,5 +1,5 @@
 import * as React from "react";
-import { BarComponent } from "./components/bar";
+import { PageBarComponent } from "./components/pageBar";
 import { DrawerComponent } from "./components/drawer";
 import { SearchComponent } from "./components/search";
 import { ItemViewComponent } from "./components/item";
@@ -13,7 +13,7 @@ interface Props {
   searchValue: string;
   itemCollection: ItemCollection;
   facetCollection: FacetCollection;
-  onSearchClick: () => void;
+  onSearchSubmit: () => void;
   onSearchUpdate: (value: string) => void;
   onDrawerClose: () => void;
   onMenuClick: () => void;
@@ -33,16 +33,14 @@ class SearchPageComponent extends React.Component<Props, {}> {
         >
           <SearchComponent
             value={this.props.searchValue}
-            onSearchClick={this.props.onSearchClick}
+            onSearchSubmit={this.props.onSearchSubmit}
             onSearchUpdate={this.props.onSearchUpdate}
           />
           <FacetViewComponent facets={this.props.facetCollection} />
         </DrawerComponent>
         <main className={style.mainContainer}>
-          <BarComponent
+          <PageBarComponent
             value={this.props.searchValue}
-            onSearchUpdate={this.props.onSearchUpdate}
-            onSearchClick={this.props.onSearchClick}
             onMenuClick={this.props.onMenuClick}
           />
           <ItemViewComponent items={this.props.itemCollection} />
