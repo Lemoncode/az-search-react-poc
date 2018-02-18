@@ -18,7 +18,7 @@ const parseItem = (movie: any): Item => {
   }
 }
 
-const parseItemCollection = (response: any): ItemCollection => {
+const itemCollectionParser = (response: any): ItemCollection => {
   const accessor = "value";
   
   if (response && response[accessor] && response[accessor].length > 0) {
@@ -32,7 +32,7 @@ const parseFacet = (response: any, accessor: string, id: string): any => {
   return response[accessor].hasOwnProperty(id) ? response[accessor][id] : null;
 }
 
-const parseFacetCollection = (baseFacets: FacetCollection, response: any): FacetCollection => {
+const facetCollectionParser = (baseFacets: FacetCollection, response: any): FacetCollection => {
   const accessor = "@search.facets";
   
   if (response && response[accessor]) {
@@ -45,4 +45,4 @@ const parseFacetCollection = (baseFacets: FacetCollection, response: any): Facet
   }
 }
 
-export { parseItemCollection, parseFacetCollection };
+export { itemCollectionParser, facetCollectionParser };

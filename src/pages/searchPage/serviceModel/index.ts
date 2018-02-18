@@ -1,3 +1,3 @@
-export { Service } from "./serviceModel";
+export { Service, ServiceInfo } from "./serviceModel";
 export { CreateService } from "./createService";
 

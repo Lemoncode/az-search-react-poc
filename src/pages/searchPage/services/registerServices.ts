@@ -1,21 +1,23 @@
-import { Service, CreateService } from "../serviceModel";
+import { Service, ServiceInfo, CreateService } from "../serviceModel";
 import {
   queryConfig,
   facetCollection,
-  parseItemCollection,
-  parseFacetCollection,
+  itemCollectionParser,
+  facetCollectionParser,
 } from "./movieService";
 
 const registeredServices = {
-  movieService: {
-    displayName: "Movie Catalog",
-    service: CreateService(
+  movieService: CreateService({
+      displayName: "Movie Catalog",
+      iconName: "movie",
+    },
+    {
       queryConfig,
       facetCollection,
-      parseItemCollection,
-      parseFacetCollection
-    ),
-  },
+      itemCollectionParser,
+      facetCollectionParser,
+    }
+  ),
 };
 
 export { registeredServices };

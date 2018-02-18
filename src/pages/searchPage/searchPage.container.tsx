@@ -20,7 +20,7 @@ class SearchPageContainer extends React.Component<{}, State> {
     this.state = {
       drawerShow: true, // TODO: Hide it by default
       searchValue: "",
-      activeService: registeredServices.movieService.service,
+      activeService: registeredServices.movieService,
       itemCollection: null,      
       facetCollection: null,
     };
@@ -71,6 +71,7 @@ class SearchPageContainer extends React.Component<{}, State> {
     return (
       <div>
         <SearchPageComponent
+          activeService={this.state.activeService}
           drawerShow={this.state.drawerShow}
           onDrawerClose={this.handleDrawerClose}
           searchValue={this.state.searchValue}

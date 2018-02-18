@@ -3,11 +3,13 @@ import Hidden from "material-ui/Hidden";
 import Drawer from "material-ui/Drawer";
 import { DrawerBarComponent } from "./drawerBar.component";
 import { cnc } from "../../../../util";
+import { Service } from "../../serviceModel";
 
 const style = require("./drawer.style.scss");
 
 
 interface Drawer {
+  activeService: Service;
   show: boolean;
   onClose: () => void;
   className?: string;
@@ -25,7 +27,7 @@ const DrawerForMobileComponent: React.StatelessComponent<Drawer> = (props) => {
           keepMounted: true, // Better open performance on mobile.
         }}
       >
-        <DrawerBarComponent onClose={props.onClose} />
+        <DrawerBarComponent onClose={props.onClose} activeService={props.activeService} />
         {props.children}
       </Drawer>
     </Hidden>
@@ -45,7 +47,7 @@ const DrawerForDesktopComponent: React.StatelessComponent<Drawer> = (props) => {
         onClose={props.onClose}
         elevation={8}
       >
-        <DrawerBarComponent onClose={props.onClose} />
+        <DrawerBarComponent onClose={props.onClose} activeService={props.activeService} />
         {props.children}
       </Drawer>
     </Hidden>
@@ -55,10 +57,18 @@ const DrawerForDesktopComponent: React.StatelessComponent<Drawer> = (props) => {
 const DrawerComponent: React.StatelessComponent<Drawer> = (props) => {
   return (
     <div className={cnc(props.show && style.raise, props.className)}>
-      <DrawerForMobileComponent show={props.show} onClose={props.onClose}>
+      <DrawerForMobileComponent 
+        show={props.show}
+        onClose={props.onClose}
+        activeService={props.activeService}
+      >
         {props.children}
       </DrawerForMobileComponent>
-      <DrawerForDesktopComponent show={props.show} onClose={props.onClose}>
+      <DrawerForDesktopComponent
+        show={props.show}
+        onClose={props.onClose}
+        activeService={props.activeService
+      }>
         {props.children}
       </DrawerForDesktopComponent>
     </div>

@@ -7,6 +7,8 @@ import { Reboot } from 'material-ui';
 import { MuiThemeProvider } from 'material-ui/styles';
 import { theme } from "./app.theme";
 
+const sassEntryPoint = require("./app.style.scss");
+
 ReactDOM.render(
   <MuiThemeProvider theme={theme}>
     <Reboot/>

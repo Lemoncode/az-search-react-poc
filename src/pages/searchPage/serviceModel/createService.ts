@@ -1,23 +1,29 @@
-import { Service, SearchOutput } from "./serviceModel";
+import { Service, ServiceInfo, SearchOutput } from "./serviceModel";
 import { ItemCollection, FacetCollection } from "../viewModel";
 import { AzQueryConfig, CreateAzApi } from "../../../api";
 import { ItemCollectionParser, FacetCollectionParser } from "./parserModel";
 
-type CreateServiceType = (queryConfig: AzQueryConfig,
-  facetCollection: FacetCollection,
-  itemCollectionParser: ItemCollectionParser,
-  facetCollectionParser: FacetCollectionParser) => Service;
+interface CreateServiceSetup {
+  queryConfig: AzQueryConfig;
+  facetCollection: FacetCollection;
+  itemCollectionParser: ItemCollectionParser;
+  facetCollectionParser: FacetCollectionParser;
+}
 
-const CreateService: CreateServiceType = (queryConfig, facetCol, itemColParser, faceColParser) => {
+type CreateServiceType = (info: ServiceInfo, setup: CreateServiceSetup ) => Service;
+
+const CreateService: CreateServiceType = (info, setup) => {
+  const {queryConfig, facetCollection, itemCollectionParser, facetCollectionParser} = setup;
   const azApi = CreateAzApi(queryConfig); 
 
   return {
+    info,
     search: async (value: string): Promise<SearchOutput> => {
       try {
         const response = await azApi.setSearch(value).run();
         return {
-          itemCollection: itemColParser(response),
-          facetCollection: faceColParser(facetCol ,response),
+          itemCollection: itemCollectionParser(response),
+          facetCollection: facetCollectionParser(facetCollection ,response),
         };
       } catch (e) { throw Error(e); }
     },

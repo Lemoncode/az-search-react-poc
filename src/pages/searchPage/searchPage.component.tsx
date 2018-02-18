@@ -5,10 +5,12 @@ import { SearchComponent } from "./components/search";
 import { ItemViewComponent } from "./components/item";
 import { FacetViewComponent } from "./components/facets";
 import { ItemCollection, FacetCollection } from "./viewModel";
+import { Service } from "./serviceModel";
 
 const style = require("./searchPage.style.scss");
 
 interface Props {
+  activeService: Service;
   drawerShow: boolean;
   searchValue: string;
   itemCollection: ItemCollection;
@@ -28,6 +30,7 @@ class SearchPageComponent extends React.Component<Props, {}> {
     return (
       <div className={style.pageContainer}>
         <DrawerComponent className={style.drawerContainer}
+          activeService={this.props.activeService}
           show={this.props.drawerShow}
           onClose={this.props.onDrawerClose}
         >

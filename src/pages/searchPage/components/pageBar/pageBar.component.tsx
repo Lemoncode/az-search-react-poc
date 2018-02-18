@@ -6,13 +6,26 @@ import Typography from "material-ui/Typography";
 import MenuIcon from "material-ui-icons/Menu";
 import HomeIcon from 'material-ui-icons/Home';
 import IconButton from "material-ui/IconButton";
+import SvgIcon from "material-ui-icons/Menu";
 
+const logoSvg = require("../../../../assets/svg/AzureSearchLogo.svg");
 const style = require("./pageBar.style.scss");
 
 interface Bar {
   value: string;
   onMenuClick: () => void;
 }
+
+const LogoComponent = () => (
+  <div className={style.logoContainer}>
+    <Typography variant="headline" color="inherit" >Azure</Typography>
+    <object className={style.logoIsotype}
+      type="image/svg+xml"
+      data={logoSvg}
+    />
+    <Typography variant="headline" color="inherit" >Search</Typography>
+  </div>
+);
 
 const PageBarComponent: React.StatelessComponent<Bar> = (props) => {
   return (
@@ -23,9 +36,7 @@ const PageBarComponent: React.StatelessComponent<Bar> = (props) => {
         >
           <MenuIcon />
         </IconButton>
-        <Typography className={style.toolbarTitle} variant="title" color="inherit" >
-          Azure Search
-        </Typography>
+        <LogoComponent />
         <Link to="/">
           <IconButton color="inherit"><HomeIcon/></IconButton>
         </Link>

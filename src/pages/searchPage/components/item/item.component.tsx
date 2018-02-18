@@ -22,13 +22,13 @@ interface State {
 
 const ratingStars = (item: Item) => ((item.rating >= 1.0) ? 
   Array(Math.floor(item.rating)).fill(0).map((item, index) => (
-    <StarIcon key={index} classes={{root: style.itemStar}}/>
+    <StarIcon key={index} classes={{root: style.itemStar}} color="secondary" />
   )) : null
 );
 
 const ItemMedia: React.StatelessComponent<Props> = (props) => {
   return (
-    <CardMedia classes={{root: style.itemMedia}}
+    <CardMedia
       component="img"
       src={props.item.thumbnail}        
       title={props.item.title}
@@ -59,7 +59,7 @@ const generateExtraFieldContent = (field: any) => {
     return (
       <div className={style.tagContainer}>
         {field.map((tag, tagIndex) => 
-          <Chip label={tag} key={tagIndex} classes={{root: style.tag}} />
+          <Chip label={tag} key={tagIndex} classes={{root: style.tag}}/>
         )}
       </div>);
   } else {

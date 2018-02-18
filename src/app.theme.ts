@@ -5,6 +5,10 @@ import pink from 'material-ui/colors/pink';import { dark } from 'material-ui/sty
 
 const theme = createMuiTheme({
   palette: {
+    common: {
+      black: "#eeeeee",
+      white: "#ffffff",
+    },
     primary: blue,
     secondary: pink,
     background: {
