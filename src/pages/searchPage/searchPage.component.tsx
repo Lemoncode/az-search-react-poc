@@ -4,7 +4,7 @@ import { DrawerComponent } from "./components/drawer";
 import { SearchComponent } from "./components/search";
 import { ItemViewComponent } from "./components/item";
 import { FacetViewComponent } from "./components/facets";
-import { ItemCollection, FacetCollection } from "./viewModel";
+import { ItemCollection, FacetCollection, FilterCollection, Filter } from "./viewModel";
 import { Service } from "./serviceModel";
 
 const style = require("./searchPage.style.scss");
@@ -15,8 +15,10 @@ interface Props {
   searchValue: string;
   itemCollection: ItemCollection;
   facetCollection: FacetCollection;
+  filterCollection: FilterCollection;
   onSearchSubmit: () => void;
   onSearchUpdate: (value: string) => void;
+  onFilterUpdate: (newFilter: Filter) => void;
   onDrawerClose: () => void;
   onMenuClick: () => void;
 }
@@ -39,7 +41,11 @@ class SearchPageComponent extends React.Component<Props, {}> {
             onSearchSubmit={this.props.onSearchSubmit}
             onSearchUpdate={this.props.onSearchUpdate}
           />
-          <FacetViewComponent facets={this.props.facetCollection} />
+          <FacetViewComponent
+            facets={this.props.facetCollection}
+            filters={this.props.filterCollection}
+            onFilterUpdate={this.props.onFilterUpdate}
+          />
         </DrawerComponent>
         <main className={style.mainContainer}>
           <PageBarComponent

@@ -23,7 +23,7 @@ const DrawerBarComponent: React.StatelessComponent<DrawerBar> = (props) => {
       disableGutters
     >
       <div className={style.serviceContainer}>
-        <Icon classes={{root: style.serviceIcon}} color="action">
+        <Icon classes={{root: style.serviceIcon}} color="primary">
           {props.activeService.info.iconName}
         </Icon>
         <Typography variant="headline">

@@ -10,6 +10,7 @@ interface AzQueryConfig {
   searchField: string;
   facets?: string[];
   limit?: number;
+  filter?: string;
 }
 
 const defaultAzQueryConfig: AzQueryConfig = {
@@ -23,7 +24,8 @@ const defaultAzQueryConfig: AzQueryConfig = {
   method: "GET",
   searchField: "*",
   facets: null,
-  limit: 10
+  limit: 10,
+  filter: "",
 }
 
 

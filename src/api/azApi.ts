@@ -8,6 +8,7 @@ interface AzApi {
   setApiKey: (apiKey: string) =>AzApi;
   setSearch: (searchField: string) => AzApi;
   setFacets: (facets: string[]) => AzApi;
+  setFilter: (filter: string) => AzApi;
   run: () => Promise<any>;
 }
 
@@ -25,7 +26,8 @@ const CreateAzApi = (queryConfig: AzQueryConfig = defaultAzQueryConfig): AzApi =
     setApiVersion(apiVer) { return setQueryParam("apiVer", apiVer); },
     setApiKey(apiKey) { return setQueryParam("apiKey", apiKey); },
     setSearch(searchField) { return setQueryParam("searchField", searchField); },
-    setFacets(facets)  {return setQueryParam("facets", facets); },
+    setFacets(facets) { return setQueryParam("facets", facets); },
+    setFilter(filter) { return setQueryParam("filter", filter); },
     
     async run() {
       try {

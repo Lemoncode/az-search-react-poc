@@ -1,5 +1,5 @@
 import * as React from "react"
-import { FacetCollection } from "../../viewModel";
+import { FacetCollection, FilterCollection, Filter } from "../../viewModel";
 import { FacetItemComponent } from "./facetItem.component";
 
 const style = require("./facetView.style.scss");
@@ -7,6 +7,8 @@ const style = require("./facetView.style.scss");
 
 interface FacetView {
   facets: FacetCollection;
+  filters: FilterCollection;
+  onFilterUpdate: (newFilter: Filter) => void;
 }
 
 const FacetViewComponent: React.StatelessComponent<FacetView> = (props) => {

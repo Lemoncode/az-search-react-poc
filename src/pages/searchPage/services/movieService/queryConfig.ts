@@ -12,7 +12,8 @@ const queryConfig: AzQueryConfig = {
   method: "GET",
   searchField: "*",
   facets: facetCollection.map(facet => facet.id),
-  limit: 10
+  limit: 10,
+  filter: "",
 }
 
 export { queryConfig };

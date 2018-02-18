@@ -4,6 +4,8 @@ import Typography from "material-ui/Typography";
 import Collapse from "material-ui/transitions/Collapse";
 import { Facet } from "../../viewModel";
 import { Chevron } from "../../../../common/components/chevron";
+import { Icon } from "material-ui";
+import { CreateSelectionControl } from "../selectionControls";
 
 const style = require("./facetItem.style.scss");
 
@@ -35,20 +37,27 @@ class FacetItemComponent extends React.Component<FacetItem, State> {
     const { facet } = this.props;
     const { expanded } = this.state;
 
-    if (!facet.valueSet) { return null }
+    if (!facet.values) { return null }
 
     return (
       <Card classes={{root:style.item}} elevation={0}>
         <CardActions classes={{root: style.itemActions}}>
-          <Typography variant="title">
-            {facet.displayName}
-          </Typography>
+          <div className={style.itemTitle}>
+            { facet.iconName ? 
+              <Icon classes={{root: style.itemIcon}} color="action">
+                {facet.iconName}
+              </Icon>
+              : null
+            }            
+            <Typography variant="title">
+              {facet.displayName}
+            </Typography>
+          </div>          
           <Chevron onClick={this.toggleExpand} expanded={expanded}/>
         </CardActions>
         <Collapse in={expanded} timeout="auto">
           <div className={style.controlContainer}>
-            Facet Control Values:
-            {JSON.stringify(facet.valueSet)}
+            {CreateSelectionControl(facet)}
           </div>          
         </Collapse>  
       </Card>

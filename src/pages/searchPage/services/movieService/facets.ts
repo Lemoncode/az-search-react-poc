@@ -4,16 +4,16 @@ const facetCollection: FacetCollection = [
   {
     id: "genreTags",
     displayName: "Genre",
-    control: "",
-    valueSet: null,
-    selected: null,
+    iconName: "mood",
+    selectionControl: "checkboxList",
+    values: null,
   },
   {
     id: "year",
     displayName: "Year",
-    control: "",
-    valueSet: null,
-    selected: null,
+    iconName: "date_range",
+    selectionControl: "checkboxList",
+    values: null,
   },
 ];
 

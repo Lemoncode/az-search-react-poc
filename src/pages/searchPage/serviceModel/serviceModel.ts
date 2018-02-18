@@ -12,7 +12,7 @@ interface ServiceInfo {
 
 interface Service {
   info: ServiceInfo;
-  search: (value: string) => Promise<SearchOutput>;
+  search: (value: string, filter: string) => Promise<SearchOutput>;
 };
 
 export { SearchOutput, Service, ServiceInfo };
