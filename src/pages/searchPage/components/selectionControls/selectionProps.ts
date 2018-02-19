@@ -1,8 +1,9 @@
-import { Facet } from "../../viewModel";
+import { Facet, Filter } from "../../viewModel";
 
 interface SelectionProps {
   facet: Facet;
-  onChange: (filterExpression: string) => void;
+  filter: Filter;
+  onFilterUpdate: (newFilter: Filter) => void;
 }
 
 export { SelectionProps };

@@ -14,9 +14,18 @@ interface FacetView {
 const FacetViewComponent: React.StatelessComponent<FacetView> = (props) => {
   return props.facets ? (
     <div className={style.container}>
-      { props.facets.map((facet, index) => (
-        <FacetItemComponent facet={facet} key={index} />
-      ))}
+      { props.facets.map((facet, index) => {
+        const filter = props.filters ? 
+          props.filters.find(f => f.fieldId === facet.fieldId) : null;
+        return (
+          <FacetItemComponent
+            facet={facet}
+            filter={filter}
+            onFilterUpdate={props.onFilterUpdate}
+            key={index}
+          />
+        )        
+      })}
     </div>
   ) : null;
 }

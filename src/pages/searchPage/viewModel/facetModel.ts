@@ -1,14 +1,20 @@
+enum FacetSortBy {
+  count,
+  value
+}
+
 interface FacetValue {
   value: string;
   count: number;
 }
 
 interface Facet {
-  id: string;
+  fieldId: string;
   displayName: string;
   iconName?: string;
   selectionControl: string;
   values: FacetValue[];
+  sortBy?: FacetSortBy;
 }
 
 type FacetCollection = Facet[];

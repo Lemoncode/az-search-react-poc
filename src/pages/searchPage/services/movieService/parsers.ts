@@ -38,7 +38,7 @@ const facetCollectionParser = (baseFacets: FacetCollection, response: any): Face
   if (response && response[accessor]) {
     return baseFacets.map(baseFacet => ({
       ...baseFacet,
-      values: parseFacet(response, accessor, baseFacet.id),
+      values: parseFacet(response, accessor, baseFacet.fieldId),
     }));    
   } else {
     return null;

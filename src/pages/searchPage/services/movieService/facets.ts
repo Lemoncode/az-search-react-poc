@@ -2,16 +2,23 @@ import { FacetCollection } from "../../viewModel/facetModel";
 
 const facetCollection: FacetCollection = [
   {
-    id: "genreTags",
+    fieldId: "genreTags",
     displayName: "Genre",
     iconName: "mood",
     selectionControl: "checkboxList",
     values: null,
   },
   {
-    id: "year",
+    fieldId: "year",
     displayName: "Year",
     iconName: "date_range",
+    selectionControl: "yearPicker",
+    values: null,
+  },
+  {
+    fieldId: "actorTags",
+    displayName: "Cast",
+    iconName: "people",
     selectionControl: "checkboxList",
     values: null,
   },

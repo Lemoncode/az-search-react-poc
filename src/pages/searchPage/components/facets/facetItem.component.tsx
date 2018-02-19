@@ -2,7 +2,7 @@ import * as React from "react"
 import Card, { CardActions, CardContent } from "material-ui/Card";
 import Typography from "material-ui/Typography";
 import Collapse from "material-ui/transitions/Collapse";
-import { Facet } from "../../viewModel";
+import { Facet, Filter } from "../../viewModel";
 import { Chevron } from "../../../../common/components/chevron";
 import { Icon } from "material-ui";
 import { CreateSelectionControl } from "../selectionControls";
@@ -11,6 +11,8 @@ const style = require("./facetItem.style.scss");
 
 interface FacetItem {
   facet: Facet;
+  filter: Filter;
+  onFilterUpdate: (newFilter: Filter) => void;
 }
 
 interface State {
@@ -34,7 +36,7 @@ class FacetItemComponent extends React.Component<FacetItem, State> {
   }
     
   public render() {
-    const { facet } = this.props;
+    const { facet, filter, onFilterUpdate } = this.props;
     const { expanded } = this.state;
 
     if (!facet.values) { return null }
@@ -57,7 +59,7 @@ class FacetItemComponent extends React.Component<FacetItem, State> {
         </CardActions>
         <Collapse in={expanded} timeout="auto">
           <div className={style.controlContainer}>
-            {CreateSelectionControl(facet)}
+            {CreateSelectionControl(facet, filter, onFilterUpdate)}
           </div>          
         </Collapse>  
       </Card>

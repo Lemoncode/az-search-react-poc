@@ -11,7 +11,7 @@ const queryConfig: AzQueryConfig = {
   contentType: "application/json",
   method: "GET",
   searchField: "*",
-  facets: facetCollection.map(facet => facet.id),
+  facets: facetCollection.map(facet => facet.fieldId),
   limit: 10,
   filter: "",
 }

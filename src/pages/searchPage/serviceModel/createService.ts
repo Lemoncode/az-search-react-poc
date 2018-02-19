@@ -19,13 +19,14 @@ const CreateService: CreateServiceType = (info, setup) => {
   return {
     info,
     search: async (value: string, filter: string): Promise<SearchOutput> => {
-      try {
+      // TODO
+      // try {
         const response = await azApi.setSearch(value).setFilter(filter).run();
         return {
           itemCollection: itemCollectionParser(response),
           facetCollection: facetCollectionParser(facetCollection ,response),
         };
-      } catch (e) { throw Error(e); }
+      // } catch (e) { throw Error(e); }
     },
   }
 }

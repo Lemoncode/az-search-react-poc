@@ -32,14 +32,19 @@ const CreateAzApi = (queryConfig: AzQueryConfig = defaultAzQueryConfig): AzApi =
     async run() {
       try {
         const request = buildRequest(queryConfig);
-        console.log(`Running Query: ${request.url}`);
+        console.log(`Running Query: ${request.url}`); // TODO. Debug only.
+
         const response = await fetch(request.url, request.options);
+        const jsonObj = await response.json();
+        
         if (!response.ok) {
-          throw new Error(`Error Code: ${response.status} - ${response.statusText}`);
+          console.log(jsonObj);
+          throw new Error(`${response.status} - ${response.statusText}
+            Message: ${jsonObj.error.message}`);
         }
-        return await response.json();
+        return jsonObj;
       } catch (e) {
-        throw e;
+        throw new Error(e);
       }
     },
   };

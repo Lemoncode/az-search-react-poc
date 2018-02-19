@@ -6,7 +6,8 @@ import { registeredServices } from "./services";
 
 
 interface State {
-  searchValue: string;
+  candidateSearchValue: string;
+  currentSearchValue: string;
   activeService: Service;
   itemCollection: ItemCollection;
   facetCollection: FacetCollection;
@@ -19,7 +20,8 @@ class SearchPageContainer extends React.Component<{}, State> {
     super(props);
 
     this.state = {
-      searchValue: "",
+      candidateSearchValue: "",
+      currentSearchValue: null,
       activeService: registeredServices.movieService,
       itemCollection: null,      
       facetCollection: null,
@@ -49,23 +51,36 @@ class SearchPageContainer extends React.Component<{}, State> {
   private handleSearchUpdate = (newValue: string) => {
     this.setState({
       ...this.state,
-      searchValue: newValue,
+      candidateSearchValue: newValue,
     });
   }
 
-  private handleSearchSubmit = () => {    
+  private handleSearchSubmit = () => {
     // Run search but reset filters intentionally. No filters for a new search.
-    this.runSearch(this.state.searchValue, []);
+    this.setState({
+      ...this.state,
+      currentSearchValue: this.state.candidateSearchValue,
+      filterCollection: null,
+    });
   }
 
   private handleFilterUpdate = (newFilter: Filter) => {
-    const newFilterCollection = [...this.state.filterCollection
-      .filter(f => f.id !== newFilter.id), newFilter];
-    this.runSearch(this.state.searchValue, newFilterCollection);
+    const newFilterCollection = this.state.filterCollection ?
+      [...this.state.filterCollection.filter(f => f.fieldId !== newFilter.fieldId), newFilter]
+      : [newFilter];
+    this.setState({
+      ...this.state,
+      filterCollection: newFilterCollection,
+    });
   }
 
   private getFilterExpression = (filterCollection: FilterCollection) => {
-    return ""; // TODO implementation
+    if (filterCollection && filterCollection.length) {
+      const expression = filterCollection.map(f => f.generateExpression()).filter(f => f).join(" and ");
+      return expression;
+    } else {
+      return "";
+    }    
   }
 
   private runSearch = (value: string, filterCollection: FilterCollection) => {
@@ -75,10 +90,16 @@ class SearchPageContainer extends React.Component<{}, State> {
           ...this.state,
           itemCollection: searchOutput.itemCollection,
           facetCollection: searchOutput.facetCollection,
-          filterCollection: filterCollection,
         })
       })
       .catch(e => { throw Error(e) });
+  }
+
+  public componentDidUpdate(prevProps, prevState) {
+    if ((this.state.currentSearchValue !== prevState.currentSearchValue) || 
+      (this.state.filterCollection !== prevState.filterCollection)) {
+        this.runSearch(this.state.currentSearchValue, this.state.filterCollection);
+    }
   }
 
   public render() {
@@ -86,7 +107,7 @@ class SearchPageContainer extends React.Component<{}, State> {
       <div>
         <SearchPageComponent
           activeService={this.state.activeService}
-          searchValue={this.state.searchValue}
+          searchValue={this.state.candidateSearchValue}
           onSearchUpdate={this.handleSearchUpdate}
           onSearchSubmit={this.handleSearchSubmit}
           filterCollection={this.state.filterCollection}

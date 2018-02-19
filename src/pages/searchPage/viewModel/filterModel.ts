@@ -1,6 +1,7 @@
 interface Filter {
-  id: string;
-  values: string[];
+  fieldId: string;
+  store: any;
+  generateExpression: () => string;
 }
 
 type FilterCollection = Filter[];

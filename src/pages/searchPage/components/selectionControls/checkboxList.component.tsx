@@ -1,56 +1,67 @@
 import * as React from "react"
 import { SelectionProps } from "./selectionProps";
 import { FormControlLabel } from "material-ui/Form";
-import { Facet, FacetValue } from "../../viewModel";
+import { Facet, FacetValue, Filter } from "../../viewModel";
 import Checkbox from "material-ui/Checkbox";
+import { isValueInList, addValueToList, removeValueFromList } from "../../../../util";
 
 const style = require("./checkboxList.style.scss");
 
 
-interface State {
-  checkedList: string[];
+interface Props extends SelectionProps {
+  //
 }
 
-class CheckboxListComponent extends React.Component<SelectionProps, State> {
+const parseFilterFromStore = (fieldId: string, store: any[]): string => {
+  return (store && store.length) ?
+    store.map(v => `${fieldId}/any(v: v eq '${v}')`).join(" or ")
+  : null;
+}
+
+class CheckboxListComponent extends React.Component<Props, {}> {
   constructor(props) {
     super(props);
-
-    this.state = {
-      checkedList: [],
-    }
-  }
-
-  private isInCheckedList = (value) => this.state.checkedList.indexOf(value) >= 0;
-
-  private checkedListAddValue = (value) => {
-    if (!this.isInCheckedList(value)) {
-      return [...this.state.checkedList, value];
-    } else {
-      return this.state.checkedList;
-    }
-  }
-
-  private checkedListRemoveValue = (value) => {
-    if (this.isInCheckedList(value)) {
-      return this.state.checkedList.filter(v => v !== value);
-    } else {
-      return this.state.checkedList;
-    }
-  }
-
-  private handleChange = value => event => {
-    let newCheckedList = (event.target.checked) ? 
-      this.checkedListAddValue(value) : this.checkedListRemoveValue(value);
-    
-      // TODO: only for debug.
-    console.log(this.state.checkedList);
   }
   
-  private getCheckbox = (value: string) => (
+  private getFilter = (): Filter => {
+    if (this.props.filter) {
+      return this.props.filter;
+    } else {
+      const newFilter = {
+        fieldId: this.props.facet.fieldId,
+        store: [],
+        generateExpression: function() {
+          return parseFilterFromStore(this.fieldId, this.store);
+        },
+      };
+      return newFilter;
+    }
+  }
+
+  private handleChange = (facetValue) => (event) => {    
+    const currentFilter = this.getFilter();
+    const newCheckedList = (event.target.checked) ? 
+      addValueToList(currentFilter.store, facetValue) : 
+      removeValueFromList(currentFilter.store, facetValue);
+    this.props.onFilterUpdate({
+      ...currentFilter,
+      store: newCheckedList,
+    });
+  }
+  
+  private isValueInFilterList = (facetValue): boolean => {
+    if (this.props.filter && this.props.filter.store){
+      return isValueInList(this.props.filter.store, facetValue);
+    } else {
+      return false;
+    }    
+  }
+
+  private getCheckbox = (facetValue) => (
     <Checkbox
-      value={value.toString()}
-      checked={this.isInCheckedList(value)}
-      onChange={this.handleChange(value)}
+      value={facetValue.toString()}
+      checked={this.isValueInFilterList(facetValue)}
+      onChange={this.handleChange(facetValue)}
     />
   ); 
   
