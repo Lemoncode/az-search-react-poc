@@ -1,9 +1,9 @@
-let webpack = require("webpack");
-let path = require("path");
-let webpackMerge = require("webpack-merge");
-let commonConfig = require("./webpack.base.config.js");
+const webpack = require("webpack");
+const path = require("path");
+const webpackMerge = require("webpack-merge");
+const commonConfig = require("./webpack.base.config.js");
 
-let basePath = __dirname;
+const basePath = __dirname;
 
 module.exports = function () {
   return webpackMerge(commonConfig, {
