@@ -27,7 +27,7 @@ const SearchComponent: React.StatelessComponent<Search> = (props) => {
         type="search"
         name="searchBox"
         id="searchBox"
-        placeholder="Search..."
+        placeholder="Search a movie ..."
         value={props.value}
         onChange={event => props.onSearchUpdate(event.target.value)}
         onKeyPress={captureEnter(props)}
