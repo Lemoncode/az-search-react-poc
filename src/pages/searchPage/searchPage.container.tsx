@@ -76,11 +76,12 @@ class SearchPageContainer extends React.Component<{}, State> {
 
   private getFilterExpression = (filterCollection: FilterCollection) => {
     if (filterCollection && filterCollection.length) {
+console.log(filterCollection);
       const expression = filterCollection.filter(f => f.store)
         .map(f => `(${f.generateExpression()})`).join(" and ");
       return expression;
     } else {
-      return "";
+      return null;
     }    
   }
 

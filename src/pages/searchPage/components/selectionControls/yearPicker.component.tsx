@@ -53,7 +53,7 @@ class YearPickerComponent extends React.Component<Props, {}> {
           disableFuture
           format="YYYY"
           // label="Choose a Year"
-          // invalidLabel="All"
+          invalidLabel="All"
           value={this.props.filter && this.props.filter.store ? this.props.filter.store : ""}
           onChange={this.handleChange}
           animateYearScrolling={true}

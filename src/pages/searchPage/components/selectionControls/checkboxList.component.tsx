@@ -29,7 +29,7 @@ class CheckboxListComponent extends React.Component<Props, {}> {
     } else {
       const newFilter = {
         fieldId: this.props.facet.fieldId,
-        store: [],
+        store: null,
         generateExpression: function() {
           return parseFilterFromStore(this.fieldId, this.store);
         },
@@ -45,7 +45,7 @@ class CheckboxListComponent extends React.Component<Props, {}> {
       removeValueFromList(currentFilter.store, facetValue);
     this.props.onFilterUpdate({
       ...currentFilter,
-      store: newCheckedList,
+      store: newCheckedList.length ? newCheckedList : null,
     });
   }
   
