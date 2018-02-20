@@ -8,10 +8,12 @@ interface AzRequest {
 const buildURL = (config: AzQueryConfig): string => {
   const queryRoot = `${config.protocol}://${config.serviceName}.${config.serviceDomain}/`;
   const queryPath = `indexes/${config.serviceIndex}/docs?api-version=${config.apiVer}`;
-  const queryPayload = 
-    config.searchField ? `&search="${config.searchField}"` : "" + 
-    config.facetField ? `&facet="${config.facetField}"` : "";
-  return queryRoot + queryPath + queryPayload;
+  const queryPayload = config.searchField ? `&search="${config.searchField}"` : "";    
+  const queryLimit = config.limit ? `&$top=${config.limit}` : "";
+  const queryFacets = config.facets ? config.facets.map(facet => `&facet=${facet}`).join("") : "";
+  const queryFilter = config.filter ? `&$filter=${config.filter}` : "";
+
+  return queryRoot + queryPath + queryPayload + queryLimit + queryFacets + queryFilter;
 }
 
 const buildRequest = (config: AzQueryConfig): AzRequest => ({

@@ -1,2 +1,2 @@
 export { AzQueryConfig } from "./azQueryConfig";
-export { AzApi, azApi } from "./azApi";
+export { AzApi, CreateAzApi } from "./azApi";

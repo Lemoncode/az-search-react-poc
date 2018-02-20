@@ -8,20 +8,24 @@ interface AzQueryConfig {
   contentType: string;
   method: string;
   searchField: string;
-  facetField: string;
+  facets?: string[];
+  limit?: number;
+  filter?: string;
 }
 
 const defaultAzQueryConfig: AzQueryConfig = {
   protocol: "https",
-  serviceName: "azs-playground",
+  serviceName: "",
   serviceDomain: "search.windows.net",
-  serviceIndex: "movies",
+  serviceIndex: "",
   apiVer: "2017-11-11",
-  apiKey: "5E81A6D21EB1A028B5C4F7F80C1A9914",
+  apiKey: "",
   contentType: "application/json",
   method: "GET",
   searchField: "*",
-  facetField: "",
+  facets: null,
+  limit: 10,
+  filter: "",
 }
 
 

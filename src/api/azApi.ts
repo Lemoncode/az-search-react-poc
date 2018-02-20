@@ -8,6 +8,7 @@ interface AzApi {
   setApiKey: (apiKey: string) =>AzApi;
   setSearch: (searchField: string) => AzApi;
   setFacets: (facets: string[]) => AzApi;
+  setFilter: (filter: string) => AzApi;
   run: () => Promise<any>;
 }
 
@@ -25,24 +26,28 @@ const CreateAzApi = (queryConfig: AzQueryConfig = defaultAzQueryConfig): AzApi =
     setApiVersion(apiVer) { return setQueryParam("apiVer", apiVer); },
     setApiKey(apiKey) { return setQueryParam("apiKey", apiKey); },
     setSearch(searchField) { return setQueryParam("searchField", searchField); },
-    setFacets(facets)  {return setQueryParam("facetField", facets); },
+    setFacets(facets) { return setQueryParam("facets", facets); },
+    setFilter(filter) { return setQueryParam("filter", filter); },
     
     async run() {
       try {
         const request = buildRequest(queryConfig);
-        console.log(`Running Query: ${request.url}`);
+        console.log(`Running Query: ${request.url}`); // TODO. Debug only.
+
         const response = await fetch(request.url, request.options);
+        const jsonObj = await response.json();
+        
         if (!response.ok) {
-          throw new Error(`Error Code: ${response.status} - ${response.statusText}`);
+          console.log(jsonObj);
+          throw new Error(`${response.status} - ${response.statusText}
+            Message: ${jsonObj.error.message}`);
         }
-        return await response.json();
+        return jsonObj;
       } catch (e) {
-        throw e;
+        throw new Error(e);
       }
     },
   };
 };
 
-const azApi = CreateAzApi();
-
-export { AzApi, azApi };
+export { AzApi, CreateAzApi };

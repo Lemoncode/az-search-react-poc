@@ -1,3 +1,3 @@
-# jfk-react-poc
+# az-search-react-poc
 
-Proof of concept. JFK simple data fetcher based on React.git 
+Azure Search Proof of concept. Simple data fetcher to show Azure Search results made with components based on React.

@@ -1,1 +1,1 @@
-export { SearchPageContainer } from "./searchPageContainer";
+export { SearchPageContainer } from "./searchPage.container";

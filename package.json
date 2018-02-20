@@ -1,7 +1,7 @@
 {
-  "name": "jfk-react-poc",
+  "name": "az-search-react-poc",
   "version": "1.0.0",
-  "description": "JFK Proof of Concept based on React",
+  "description": "Azure Search Proof of Concept based on React",
   "main": "app.js",
   "scripts": {
     "start": "webpack-dev-server --config=webpack.dev.config.js",
@@ -11,9 +11,12 @@
   "author": "Javier Calzado",
   "license": "ISC",
   "dependencies": {
-    "bootstrap": "^4.0.0",
-    "react": "~16.1.1",
-    "react-dom": "~16.1.1",
+    "material-ui": "^1.0.0-beta.33",
+    "material-ui-icons": "^1.0.0-beta.17",
+    "material-ui-pickers": "^1.0.0-beta.15.1",
+    "moment": "^2.20.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2"
   },
   "devDependencies": {
