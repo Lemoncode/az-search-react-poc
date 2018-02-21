@@ -1,34 +1,59 @@
-import { Service, ServiceInfo, SearchOutput } from "./serviceModel";
+import { Service, ServiceInfo, SearchOutput, SuggestionOutput } from "./serviceModel";
 import { ItemCollection, FacetCollection } from "../viewModel";
 import { AzQueryConfig, CreateAzApi } from "../../../api";
-import { ItemCollectionParser, FacetCollectionParser } from "./parserModel";
+import {
+  ItemCollectionParser,
+  FacetCollectionParser,
+  SuggestionCollectionParser,
+} from "./parserModel";
 
-interface CreateServiceSetup {
+interface SearchSetup {
   queryConfig: AzQueryConfig;
   facetCollection: FacetCollection;
   itemCollectionParser: ItemCollectionParser;
   facetCollectionParser: FacetCollectionParser;
 }
 
-type CreateServiceType = (info: ServiceInfo, setup: CreateServiceSetup ) => Service;
+interface SuggestionSetup {
+  queryConfig: AzQueryConfig;
+  suggestionCollectionParser: SuggestionCollectionParser;
+}
 
-const CreateService: CreateServiceType = (info, setup) => {
-  const {queryConfig, facetCollection, itemCollectionParser, facetCollectionParser} = setup;
-  const azApi = CreateAzApi(queryConfig); 
+type CreateServiceType = (info: ServiceInfo, searchSetup: SearchSetup, suggestionSetup?: SuggestionSetup) => Service;
+
+const CreateService: CreateServiceType = (info, searchSetup, suggestionSetup) => {
+  const { facetCollection, itemCollectionParser, facetCollectionParser } = searchSetup;
+  const { suggestionCollectionParser } = suggestionSetup;
+  const searchApi = CreateAzApi(searchSetup.queryConfig);
+  const suggestionApi = CreateAzApi(suggestionSetup.queryConfig);
 
   return {
     info,
     search: async (value: string, filter: string): Promise<SearchOutput> => {
-      // TODO
-      // try {
-        const response = await azApi.setSearch(value).setFilter(filter).run();
+      try {
+        const response = await searchApi
+          .setSearch(value)
+          .setFilter(filter)
+          .run();
         return {
           itemCollection: itemCollectionParser(response),
-          facetCollection: facetCollectionParser(facetCollection ,response),
+          facetCollection: facetCollectionParser(facetCollection, response),
         };
-      // } catch (e) { throw Error(e); }
+      } catch (e) {
+        throw Error(e);
+      }
     },
-  }
-}
+    suggest: async (value: string): Promise<SuggestionOutput> => {
+      try {
+        const response = await suggestionApi.setSearch(value).run();
+        return {
+          suggestionCollection: suggestionCollectionParser(response),
+        };
+      } catch (e) {
+        throw Error(e);
+      }
+    },
+  };
+};
 
 export { CreateService };

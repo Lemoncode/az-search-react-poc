@@ -1,6 +1,7 @@
-import { ItemCollection, FacetCollection } from "../viewModel";
+import { ItemCollection, FacetCollection, SuggestionCollection } from "../viewModel";
 
 type ItemCollectionParser = (response: any) => ItemCollection;
 type FacetCollectionParser = (baseFacetCollection: FacetCollection, response: any) => FacetCollection;
+type SuggestionCollectionParser = (response: any) => SuggestionCollection;
 
-export { ItemCollectionParser, FacetCollectionParser };
+export { ItemCollectionParser, FacetCollectionParser, SuggestionCollectionParser };

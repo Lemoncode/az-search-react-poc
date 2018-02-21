@@ -2,6 +2,8 @@ import * as React from "react"
 import Button from "material-ui/Button";
 import Search from "material-ui-icons/Search";
 import TextField from "material-ui/TextField";
+import { AutocompleteInputComponent } from "./autocomplete.component";
+import { SuggestionCollection } from "../../viewModel";
 import { cnc } from "../../../../util";
 
 const style = require("./search.style.scss");
@@ -11,7 +13,12 @@ interface Search {
   value: string;
   onSearchSubmit: () => void;
   onSearchUpdate: (value: string) => void;
+  suggestionCollection?: SuggestionCollection;
   className?: string;
+}
+
+const handleOnSearchUpdate = (props: Search) => (newValue: string) => {
+  props.onSearchUpdate(newValue)
 }
 
 const captureEnter = (props) => (e) => {
@@ -23,15 +30,15 @@ const captureEnter = (props) => (e) => {
 const SearchComponent: React.StatelessComponent<Search> = (props) => {
   return (
     <div className={cnc(props.className, style.container)}>
-      <TextField
+      <AutocompleteInputComponent className={style.input}
         type="search"
         name="searchBox"
         id="searchBox"
         placeholder="Search a movie ..."
-        value={props.value}
-        onChange={event => props.onSearchUpdate(event.target.value)}
+        searchValue={props.value}
+        suggestionCollection={props.suggestionCollection}
+        onSearchUpdate={handleOnSearchUpdate(props)}
         onKeyPress={captureEnter(props)}
-        fullWidth
         autoFocus
       />
       <Button classes={{root: style.button}}

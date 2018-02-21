@@ -1,4 +1,4 @@
-import { Item, ItemCollection, FacetCollection } from "../../viewModel";
+import { Item, ItemCollection, FacetCollection, SuggestionCollection, Suggestion } from "../../viewModel";
 
 const parseItem = (movie: any): Item => {
   if (movie) {
@@ -45,4 +45,24 @@ const facetCollectionParser = (baseFacets: FacetCollection, response: any): Face
   }
 }
 
-export { itemCollectionParser, facetCollectionParser };
+const parseSuggestion = (suggestion: any): Suggestion => {
+  if (suggestion) {
+    return {
+      text: suggestion.text,
+    };
+  } else {
+    return null
+  }
+}
+
+const suggestionCollectionParser = (response: any): SuggestionCollection => {
+  const accessor = "value";
+  
+  if (response && response[accessor] && response[accessor].length > 0) {
+    return response[accessor].map(item => parseSuggestion(item));
+  } else {
+    return null;
+  }
+}
+
+export { itemCollectionParser, facetCollectionParser, suggestionCollectionParser };

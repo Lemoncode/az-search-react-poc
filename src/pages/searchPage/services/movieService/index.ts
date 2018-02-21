@@ -1,3 +1,7 @@
 export { facetCollection } from "./facets";
-export { queryConfig } from "./queryConfig";
-export { itemCollectionParser, facetCollectionParser } from "./parsers";
+export { searchQueryConfig, suggestionQueryConfig } from "./queryConfig";
+export {
+  itemCollectionParser,
+  facetCollectionParser,
+  suggestionCollectionParser
+} from "./parsers";

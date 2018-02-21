@@ -1,9 +1,11 @@
 import { Service, ServiceInfo, CreateService } from "../serviceModel";
 import {
-  queryConfig,
+  searchQueryConfig,
+  suggestionQueryConfig,
   facetCollection,
   itemCollectionParser,
   facetCollectionParser,
+  suggestionCollectionParser
 } from "./movieService";
 
 const registeredServices = {
@@ -12,11 +14,15 @@ const registeredServices = {
       iconName: "movie",
     },
     {
-      queryConfig,
+      queryConfig: searchQueryConfig,
       facetCollection,
       itemCollectionParser,
       facetCollectionParser,
-    }
+    },
+    {
+      queryConfig: suggestionQueryConfig,
+      suggestionCollectionParser,
+    },
   ),
 };
 
