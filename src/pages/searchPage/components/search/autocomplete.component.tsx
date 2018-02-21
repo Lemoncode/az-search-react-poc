@@ -1,13 +1,13 @@
 import * as React from "react";
-import { withStyles } from "material-ui/styles";
+import { SuggestionCollection, Suggestion } from "../../viewModel";
 import TextField, { TextFieldProps } from "material-ui/TextField";
 import Paper from "material-ui/Paper";
 import { cnc } from "../../../../util";
 import { MenuItem } from "material-ui/Menu";
 import Downshift from "downshift";
-import { SuggestionCollection, Suggestion } from "../../viewModel";
 
 const style = require("./autocomplete.style.scss");
+
 
 interface AutocompleteInput {
   type: string;
@@ -22,28 +22,21 @@ interface AutocompleteInput {
   className?: string;
 }
 
-const handleOnChange = (props: AutocompleteInput) => event => {
-  props.onSearchUpdate(event.target.value);
-};
-
-const renderInput = (props, innerProps) => {
+const renderInput = (params) => {
+  const {innerInputProps, ...other} = params;
   return (
     <TextField
-      type={props.type}
-      name={props.name}
-      id={props.id}
-      value={props.searchValue}
-      onChange={handleOnChange(props)}
-      onKeyPress={props.onKeyPress}
-      placeholder={props.placeholder || "Search ..."}
-      autoFocus
-      fullWidth
-      {...innerProps}
+      {...other}
+      
+      InputProps = {
+        ...innerInputProps
+      }      
     />
   );
 };
 
-const renderSuggestionItem = (suggestion: Suggestion, index, composedProps, highlightedIndex, selectedItem) => {
+const renderSuggestionItem = (params) => {
+  const {suggestion, index, composedProps, highlightedIndex, selectedItem} = params;
   const isHighlighted = highlightedIndex === index;
   const isSelected = selectedItem === suggestion.text;
 
@@ -60,21 +53,22 @@ const renderSuggestionItem = (suggestion: Suggestion, index, composedProps, high
   );
 };
 
-const renderSuggestionCollection = ( suggestionCollection: SuggestionCollection, getItemProps, isOpen, selectedItem, highlightedIndex) => {
+const renderSuggestionCollection = (params) => {
+  const {suggestionCollection, getItemProps, isOpen, selectedItem, highlightedIndex} = params;
   if (isOpen && suggestionCollection && suggestionCollection.length) {
     return (
-      <Paper square>
+      <Paper square classes={{root: style.drowpdown}}>
         {suggestionCollection.map((suggestion, index) =>
-          renderSuggestionItem(
+          renderSuggestionItem({
             suggestion,
             index,
-            getItemProps({
+            composedProps: getItemProps({
               item: suggestion.text,
               index: index,
             }),
             highlightedIndex,
             selectedItem,
-          )
+          })
         )}
       </Paper>
     );
@@ -84,19 +78,34 @@ const renderSuggestionCollection = ( suggestionCollection: SuggestionCollection,
 };
 
 const AutocompleteInputComponent: React.StatelessComponent<AutocompleteInput> = props => {
-console.log(props.suggestionCollection)
   return (
-    <Downshift>
+    <Downshift      
+      onInputValueChange={(newValue: string) => props.onSearchUpdate(newValue)}
+      itemToString={(item) => {
+        return item ? item.toString() : "";
+      }}
+    >
       {({ getInputProps, getItemProps, isOpen, inputValue, selectedItem, highlightedIndex }) => (
         <div className={cnc(props.className, style.container)}>
-          {renderInput(props, getInputProps())}
-          {renderSuggestionCollection(
-            props.suggestionCollection,
+          {renderInput({
+            autoFocus: true,
+            fullWidth: true,
+            innerInputProps: getInputProps({
+              type: props.type,
+              name: props.name,
+              id: props.id,
+              placeholder: props.placeholder,
+              onKeyPress: props.onKeyPress
+            }),
+            classes: {root: style.input}
+          })}
+          {renderSuggestionCollection({
+            suggestionCollection: props.suggestionCollection,
             getItemProps,
             isOpen,
             selectedItem,
             highlightedIndex,
-          )}
+          })}
         </div>
       )}
     </Downshift>

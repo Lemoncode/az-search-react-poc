@@ -107,25 +107,30 @@ class SearchPageContainer extends React.Component<{}, State> {
           facetCollection: searchOutput.facetCollection,
         });
       })
-      .catch(e => {
-        throw Error(e);
+      .catch(rejectedValue => {
+        this.setState({
+          ...this.state,
+          itemCollection: null,
+          facetCollection: null,
+        });
       });
   };
 
   private runSuggestions = throttle((value: string) => {
-    if(value.length >= 3) {
-      this.state.activeService
-        .suggest(value)
-        .then(suggestionOutput => {
-          this.setState({
-            ...this.state,
-            suggestionCollection: suggestionOutput.suggestionCollection,
-          });
-        })
-        .catch(e => {
-          throw Error(e);
+    this.state.activeService
+      .suggest(value)
+      .then(suggestionOutput => {
+        this.setState({
+          ...this.state,
+          suggestionCollection: suggestionOutput.suggestionCollection,
         });
-    }    
+      })
+      .catch(rejectedValue => {
+        this.setState({
+          ...this.state,
+          suggestionCollection: null,
+        });
+      });
   }, 250, {leading: true, trailing: true});
   
 

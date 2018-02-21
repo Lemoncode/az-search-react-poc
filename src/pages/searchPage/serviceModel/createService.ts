@@ -31,6 +31,7 @@ const CreateService: CreateServiceType = (info, searchSetup, suggestionSetup) =>
     info,
     search: async (value: string, filter: string): Promise<SearchOutput> => {
       try {
+        if (!value) { return Promise.reject(null); }
         const response = await searchApi
           .setSearch(value)
           .setFilter(filter)
@@ -38,13 +39,14 @@ const CreateService: CreateServiceType = (info, searchSetup, suggestionSetup) =>
         return {
           itemCollection: itemCollectionParser(response),
           facetCollection: facetCollectionParser(facetCollection, response),
-        };
+        };       
       } catch (e) {
         throw Error(e);
       }
     },
     suggest: async (value: string): Promise<SuggestionOutput> => {
       try {
+        if (!value) { return Promise.reject(null); }
         const response = await suggestionApi.setSearch(value).run();
         return {
           suggestionCollection: suggestionCollectionParser(response),
