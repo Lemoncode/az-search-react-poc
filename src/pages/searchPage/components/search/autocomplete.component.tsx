@@ -27,7 +27,7 @@ const renderInput = (params) => {
   return (
     <TextField
       {...other}
-      
+      classes={{root: style.input}}
       InputProps = {
         ...innerInputProps
       }      
@@ -57,7 +57,7 @@ const renderSuggestionCollection = (params) => {
   const {suggestionCollection, getItemProps, isOpen, selectedItem, highlightedIndex} = params;
   if (isOpen && suggestionCollection && suggestionCollection.length) {
     return (
-      <Paper square classes={{root: style.drowpdown}}>
+      <Paper square classes={{root: style.dropdownArea}}>
         {suggestionCollection.map((suggestion, index) =>
           renderSuggestionItem({
             suggestion,
@@ -96,8 +96,7 @@ const AutocompleteInputComponent: React.StatelessComponent<AutocompleteInput> = 
               id: props.id,
               placeholder: props.placeholder,
               onKeyPress: props.onKeyPress
-            }),
-            classes: {root: style.input}
+            }),            
           })}
           {renderSuggestionCollection({
             suggestionCollection: props.suggestionCollection,
