@@ -1,8 +1,12 @@
-import { ItemCollection, FacetCollection } from "../viewModel";
+import { ItemCollection, FacetCollection, SuggestionCollection } from "../viewModel";
 
 interface SearchOutput {
   itemCollection: ItemCollection;
   facetCollection: FacetCollection;
+};
+
+interface SuggestionOutput {
+  suggestionCollection: SuggestionCollection;
 };
 
 interface ServiceInfo {
@@ -13,6 +17,7 @@ interface ServiceInfo {
 interface Service {
   info: ServiceInfo;
   search: (value: string, filter: string) => Promise<SearchOutput>;
+  suggest?: (value: string) => Promise<SuggestionOutput>;
 };
 
-export { SearchOutput, Service, ServiceInfo };
+export { SearchOutput, SuggestionOutput, Service, ServiceInfo };

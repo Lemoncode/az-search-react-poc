@@ -2,12 +2,12 @@ import { AzQueryConfig, defaultAzQueryConfig } from "./azQueryConfig";
 import { buildRequest, AzRequest } from "./azRequest";
 
 interface AzApi {
-  setServiceName: (serviceName: string) => AzApi;
-  setServiceIndex: (serviceIndex: string) => AzApi;
-  setApiVersion: (apiVer: string) =>AzApi;
-  setApiKey: (apiKey: string) =>AzApi;
+  // setServiceName: (serviceName: string) => AzApi;
+  // setServiceIndex: (serviceIndex: string) => AzApi;
+  // setApiVersion: (apiVer: string) =>AzApi;
+  // setApiKey: (apiKey: string) =>AzApi;
   setSearch: (searchField: string) => AzApi;
-  setFacets: (facets: string[]) => AzApi;
+  // setFacets: (facets: string[]) => AzApi;
   setFilter: (filter: string) => AzApi;
   run: () => Promise<any>;
 }
@@ -21,12 +21,12 @@ const CreateAzApi = (queryConfig: AzQueryConfig = defaultAzQueryConfig): AzApi =
   };
 
   return {
-    setServiceName(serviceName) { return setQueryParam("serviceName", serviceName); },
-    setServiceIndex(serviceIndex) { return setQueryParam("serviceIndex", serviceIndex); },
-    setApiVersion(apiVer) { return setQueryParam("apiVer", apiVer); },
-    setApiKey(apiKey) { return setQueryParam("apiKey", apiKey); },
+    // setServiceName(serviceName) { return setQueryParam("serviceName", serviceName); },
+    // setServiceIndex(serviceIndex) { return setQueryParam("serviceIndex", serviceIndex); },
+    // setApiVersion(apiVer) { return setQueryParam("apiVer", apiVer); },
+    // setApiKey(apiKey) { return setQueryParam("apiKey", apiKey); },
     setSearch(searchField) { return setQueryParam("searchField", searchField); },
-    setFacets(facets) { return setQueryParam("facets", facets); },
+    // setFacets(facets) { return setQueryParam("facets", facets); },
     setFilter(filter) { return setQueryParam("filter", filter); },
     
     async run() {

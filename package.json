@@ -3,14 +3,26 @@
   "version": "1.0.0",
   "description": "Azure Search Proof of Concept based on React",
   "main": "app.js",
+  "config": {
+    "build": "dist",
+    "remote": "GH-Lemoncode",
+    "msg": "Github Deploy in gh-pages"
+  },
   "scripts": {
     "start": "webpack-dev-server --config=webpack.dev.config.js",
-    "build": "rimraf dist && webpack --config=webpack.dev.config.js",
-    "build:prod": "rimraf dist && webpack -p --config=webpack.prod.config.js"
+    "build:dev": "rimraf dist && webpack --config=webpack.dev.config.js",
+    "build:prod": "rimraf dist && webpack -p --config=webpack.prod.config.js",
+    "build:deploy": "rimraf dist && webpack --config=webpack.prod.config.js",
+    "gh:clean": "rimraf \"%npm_package_config_build%/**/*\" && rimraf \"%npm_package_config_build%/**/.!(git)\"",
+    "gh:reset": "rimraf %npm_package_config_build% && git worktree prune && git branch -D gh-pages && git push -d %npm_package_config_remote% gh-pages",
+    "gh:init": "git worktree add -B gh-pages %npm_package_config_build% && npm run gh:clean",
+    "gh:deploy": "npm run build:deploy && cd %npm_package_config_build% && git add --all && git commit -m \"%npm_package_config_msg%\" && git push %npm_package_config_remote% gh-pages"
   },
   "author": "Javier Calzado",
   "license": "ISC",
   "dependencies": {
+    "downshift": "^1.28.0",
+    "lodash.throttle": "^4.1.1",
     "material-ui": "^1.0.0-beta.33",
     "material-ui-icons": "^1.0.0-beta.17",
     "material-ui-pickers": "^1.0.0-beta.15.1",
