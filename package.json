@@ -10,10 +10,10 @@
   },
   "scripts": {
     "start": "webpack-dev-server --config=webpack.dev.config.js",
-    "build:dev": "rimraf dist && webpack --config=webpack.dev.config.js",
-    "build:prod": "rimraf dist && webpack -p --config=webpack.prod.config.js",
-    "build:deploy": "rimraf dist && webpack --config=webpack.prod.config.js",
-    "gh:clean": "rimraf \"%npm_package_config_build%/**/*\" && rimraf \"%npm_package_config_build%/**/.!(git)\"",
+    "clean": "rimraf \"%npm_package_config_build%/**/*\" && rimraf \"%npm_package_config_build%/**/.!(git)\"",
+    "build:dev": "npm run clean && webpack --config=webpack.dev.config.js",
+    "build:prod": "npm run clean && webpack -p --config=webpack.prod.config.js",
+    "build:deploy": "npm run clean && webpack --config=webpack.prod.config.js",
     "gh:reset": "rimraf %npm_package_config_build% && git worktree prune && git branch -D gh-pages && git push -d %npm_package_config_remote% gh-pages",
     "gh:init": "git worktree add -B gh-pages %npm_package_config_build% && npm run gh:clean",
     "gh:deploy": "npm run build:deploy && cd %npm_package_config_build% && git add --all && git commit -m \"%npm_package_config_msg%\" && git push %npm_package_config_remote% gh-pages"
