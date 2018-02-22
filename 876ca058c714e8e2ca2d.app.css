@@ -69,11 +69,12 @@
   position: static !important;
   width: 25rem;
   padding: 0 1rem; }
-.input__autocomplete-style___dY2jA {
+.container__autocomplete-style___1aOQv {
   position: relative; }
 
-.dropdown__autocomplete-style___1rgC4 {
-  position: absolute; }
+.dropdown-area__autocomplete-style___3c9kB {
+  position: absolute;
+  width: 100%; }
 .container__search-style___2gUeJ {
   display: flex;
   flex-direction: row;
@@ -193,4 +194,4 @@
   justify-content: flex-start; }
 
 
-/*# sourceMappingURL=26f0b3089bd6dace3822.app.css.map*/
+/*# sourceMappingURL=876ca058c714e8e2ca2d.app.css.map*/

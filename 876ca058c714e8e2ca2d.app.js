@@ -24630,7 +24630,7 @@ const style = __webpack_require__(587);
 const renderInput = params => {
     const { innerInputProps } = params,
           other = __rest(params, ["innerInputProps"]);
-    return __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_material_ui_TextField___default.a, Object.assign({}, other, { InputProps: innerInputProps }));
+    return __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_material_ui_TextField___default.a, Object.assign({}, other, { classes: { root: style.input }, InputProps: innerInputProps }));
 };
 const renderSuggestionItem = params => {
     const { suggestion, index, composedProps, highlightedIndex, selectedItem } = params;
@@ -24641,7 +24641,7 @@ const renderSuggestionItem = params => {
 const renderSuggestionCollection = params => {
     const { suggestionCollection, getItemProps, isOpen, selectedItem, highlightedIndex } = params;
     if (isOpen && suggestionCollection && suggestionCollection.length) {
-        return __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_2_material_ui_Paper___default.a, { square: true, classes: { root: style.drowpdown } }, suggestionCollection.map((suggestion, index) => renderSuggestionItem({
+        return __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_2_material_ui_Paper___default.a, { square: true, classes: { root: style.dropdownArea } }, suggestionCollection.map((suggestion, index) => renderSuggestionItem({
             suggestion,
             index,
             composedProps: getItemProps({
@@ -24667,8 +24667,7 @@ const AutocompleteInputComponent = props => {
             id: props.id,
             placeholder: props.placeholder,
             onKeyPress: props.onKeyPress
-        }),
-        classes: { root: style.input }
+        })
     }), renderSuggestionCollection({
         suggestionCollection: props.suggestionCollection,
         getItemProps,
@@ -26092,7 +26091,7 @@ Downshift$1.resetIdCounter = resetIdCounter;
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-module.exports = {"input":"input__autocomplete-style___dY2jA","dropdown":"dropdown__autocomplete-style___1rgC4"};
+module.exports = {"container":"container__autocomplete-style___1aOQv","dropdown-area":"dropdown-area__autocomplete-style___3c9kB","dropdownArea":"dropdown-area__autocomplete-style___3c9kB"};
 
 /***/ }),
 /* 588 */
@@ -29952,4 +29951,4 @@ const theme = Object(__WEBPACK_IMPORTED_MODULE_0_material_ui_styles__["createMui
 
 /***/ })
 ],[359]);
-//# sourceMappingURL=26f0b3089bd6dace3822.app.js.map
+//# sourceMappingURL=876ca058c714e8e2ca2d.app.js.map
