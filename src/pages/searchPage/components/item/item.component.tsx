@@ -28,7 +28,7 @@ const ratingStars = (item: Item) => ((item.rating >= 1.0) ?
 
 const ItemMedia: React.StatelessComponent<Props> = (props) => {
   return (
-    <CardMedia
+    <CardMedia className={style.itemMedia}
       component="img"
       src={props.item.thumbnail}        
       title={props.item.title}
