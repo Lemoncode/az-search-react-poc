@@ -23644,7 +23644,6 @@ class SearchPageContainer extends __WEBPACK_IMPORTED_MODULE_0_react__["Component
         };
         this.getFilterExpression = filterCollection => {
             if (filterCollection && filterCollection.length) {
-                console.log(filterCollection);
                 const expression = filterCollection.filter(f => f.store).map(f => `(${f.generateExpression()})`).join(" and ");
                 return expression;
             } else {
@@ -24630,7 +24629,7 @@ const style = __webpack_require__(587);
 const renderInput = params => {
     const { innerInputProps } = params,
           other = __rest(params, ["innerInputProps"]);
-    return __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_material_ui_TextField___default.a, Object.assign({}, other, { classes: { root: style.input }, InputProps: innerInputProps }));
+    return __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_material_ui_TextField___default.a, Object.assign({}, other, { classes: { root: style.input }, InputProps: Object.assign({}, innerInputProps) }));
 };
 const renderSuggestionItem = params => {
     const { suggestion, index, composedProps, highlightedIndex, selectedItem } = params;
@@ -24655,10 +24654,9 @@ const renderSuggestionCollection = params => {
         return null;
     }
 };
+const handleItemToString = item => item ? item.toString() : "";
 const AutocompleteInputComponent = props => {
-    return __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_5_downshift__["a" /* default */], { onInputValueChange: newValue => props.onSearchUpdate(newValue), itemToString: item => {
-            return item ? item.toString() : "";
-        } }, ({ getInputProps, getItemProps, isOpen, inputValue, selectedItem, highlightedIndex }) => __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("div", { className: Object(__WEBPACK_IMPORTED_MODULE_3__util__["b" /* cnc */])(props.className, style.container) }, renderInput({
+    return __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_5_downshift__["a" /* default */], { selectedItem: props.searchValue, onInputValueChange: newValue => props.onSearchUpdate(newValue), itemToString: handleItemToString }, ({ getInputProps, getItemProps, isOpen, inputValue, selectedItem, highlightedIndex }) => __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("div", { className: Object(__WEBPACK_IMPORTED_MODULE_3__util__["b" /* cnc */])(props.className, style.container) }, renderInput({
         autoFocus: true,
         fullWidth: true,
         innerInputProps: getInputProps({
@@ -24666,7 +24664,7 @@ const AutocompleteInputComponent = props => {
             name: props.name,
             id: props.id,
             placeholder: props.placeholder,
-            onKeyPress: props.onKeyPress
+            onKeyDown: props.onKeyPress
         })
     }), renderSuggestionCollection({
         suggestionCollection: props.suggestionCollection,
@@ -29951,4 +29949,4 @@ const theme = Object(__WEBPACK_IMPORTED_MODULE_0_material_ui_styles__["createMui
 
 /***/ })
 ],[359]);
-//# sourceMappingURL=876ca058c714e8e2ca2d.app.js.map
+//# sourceMappingURL=ddf109af8b23fdf107e1.app.js.map
