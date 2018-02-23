@@ -28,9 +28,9 @@ const renderInput = (params) => {
     <TextField
       {...other}
       classes={{root: style.input}}
-      InputProps = {
-        ...innerInputProps
-      }      
+      InputProps={{
+        ...innerInputProps,
+      }}
     />
   );
 };
@@ -77,13 +77,14 @@ const renderSuggestionCollection = (params) => {
   }
 };
 
+const handleItemToString = item => (item ? item.toString() : "");
+
 const AutocompleteInputComponent: React.StatelessComponent<AutocompleteInput> = props => {
   return (
-    <Downshift      
-      onInputValueChange={(newValue: string) => props.onSearchUpdate(newValue)}
-      itemToString={(item) => {
-        return item ? item.toString() : "";
-      }}
+    <Downshift
+      selectedItem={props.searchValue}
+      onInputValueChange={newValue => props.onSearchUpdate(newValue)}
+      itemToString={handleItemToString}
     >
       {({ getInputProps, getItemProps, isOpen, inputValue, selectedItem, highlightedIndex }) => (
         <div className={cnc(props.className, style.container)}>
@@ -95,8 +96,10 @@ const AutocompleteInputComponent: React.StatelessComponent<AutocompleteInput> = 
               name: props.name,
               id: props.id,
               placeholder: props.placeholder,
-              onKeyPress: props.onKeyPress
-            }),            
+              onKeyDown: e => {
+                props.onKeyPress(e);
+              }
+            }),
           })}
           {renderSuggestionCollection({
             suggestionCollection: props.suggestionCollection,
