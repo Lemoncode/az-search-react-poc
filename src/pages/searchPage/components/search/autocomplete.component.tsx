@@ -96,9 +96,7 @@ const AutocompleteInputComponent: React.StatelessComponent<AutocompleteInput> = 
               name: props.name,
               id: props.id,
               placeholder: props.placeholder,
-              onKeyDown: e => {
-                props.onKeyPress(e);
-              }
+              onKeyDown: props.onKeyPress,
             }),
           })}
           {renderSuggestionCollection({
